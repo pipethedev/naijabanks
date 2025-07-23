@@ -1,3 +1,3 @@
-export * from './absolute-url';
+export * from './absoluteUrl';
 export * from './cn';
 export * from './truncate';

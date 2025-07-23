@@ -1,11 +1,9 @@
-import React from 'react';
+import { LogoGrid } from '@/components/LogoGrid';
 
-const Homepage = () => {
-    return (
-        <div className='flex min-h-screen flex-col items-center justify-center bg-gray-100'>
-            <div className='text-2xl font-bold text-gray-800'>Welcome to the NBL Website</div>
-        </div>
-    );
-};
+import { logos } from './data/logos';
 
-export default Homepage;
+export default async function HomePage() {
+    const allLogos = logos;
+
+    return <LogoGrid logos={allLogos} />;
+}

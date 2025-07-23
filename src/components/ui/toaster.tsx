@@ -8,7 +8,7 @@ import {
     ToastTitle,
     ToastViewport
 } from '@/components/design-system/toast';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/useToast';
 
 import IconAlertCircle from '../icon/IconAlertCircle';
 import IconCheckCircle from '../icon/IconCheckCircle';
