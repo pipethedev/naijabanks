@@ -10,12 +10,7 @@ interface LogoNotFoundProps {
 
 export function LogoNotFound({ notFoundTerm }: LogoNotFoundProps) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className='text-primary mt-6 flex w-full flex-col items-center justify-center'>
+        <motion.div className='text-primary mt-6 flex w-full flex-col items-center justify-center'>
             <PackageOpen size={40} className='mb-4' />
             <p className='text-primary mb-1'>Couldn't find the logo</p>
             <p className='text-md text-muted-foreground mb-4 font-mono'>"{notFoundTerm}"</p>

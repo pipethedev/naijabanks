@@ -7,6 +7,7 @@ import { useSearchStore } from '@/store/searchStore';
 import type { Logo } from '@/types';
 
 import { LogoNotFound } from './LogoNotFound';
+import { AnimatePresence, motion } from 'framer-motion';
 import Fuse from 'fuse.js';
 import { ArrowUpDown, Trash2Icon } from 'lucide-react';
 
@@ -21,7 +22,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
     const fuse = useMemo(
         () =>
             new Fuse(logos, {
-                keys: ['title', 'category'],
+                keys: ['title', 'categories'],
                 threshold: 0.3
             }),
         [logos]
@@ -43,19 +44,35 @@ export function LogoGrid({ logos }: LogoGridProps) {
         setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
     };
 
+    const gridVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.05
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 }
+    };
+
     return (
         <div>
             {filteredLogos.length > 0 && (
                 <div className='mb-4 flex items-center justify-end gap-x-4'>
                     {query !== '' && (
-                        <button
+                        <motion.button
+                            layoutId='clear-search'
                             type='button'
                             aria-label='clear search'
                             onClick={() => useSearchStore.getState().setQuery('')}
                             className='text-muted-foreground hover:text-foreground flex cursor-pointer items-center text-sm'>
                             <Trash2Icon className='mr-2 h-4 w-4' />
                             <span>Clear Search</span>
-                        </button>
+                        </motion.button>
                     )}
                     <button
                         type='button'
@@ -66,15 +83,32 @@ export function LogoGrid({ logos }: LogoGridProps) {
                     </button>
                 </div>
             )}
-            {filteredLogos.length > 0 ? (
-                <div className='scrollbar-hide grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
-                    {filteredLogos.map((logo) => (
-                        <LogoCard key={logo.title} logo={logo} />
-                    ))}
-                </div>
-            ) : (
-                <LogoNotFound notFoundTerm={query} />
-            )}
+            <AnimatePresence mode='wait'>
+                {filteredLogos.length > 0 ? (
+                    <motion.div
+                        key='logo-grid'
+                        variants={gridVariants}
+                        initial='hidden'
+                        animate='visible'
+                        exit='hidden'
+                        className='scrollbar-hide grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+                        {filteredLogos.map((logo) => (
+                            <motion.div key={logo.title} variants={cardVariants}>
+                                <LogoCard logo={logo} />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key='not-found'
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}>
+                        <LogoNotFound notFoundTerm={query} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }

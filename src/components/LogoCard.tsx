@@ -9,6 +9,7 @@ import { useToast } from '@/hooks/useToast';
 import type { Logo } from '@/types';
 import { copyToClipboard } from '@/utils/clipboard';
 
+import { motion } from 'framer-motion';
 import { Check, Copy, Download, LinkIcon } from 'lucide-react';
 
 interface LogoCardProps {
@@ -59,7 +60,11 @@ export function LogoCard({ logo }: LogoCardProps) {
     }, [logo.route, logo.title, toast]);
 
     return (
-        <div className='bg-card border-border hover:border-primary/60 flex flex-col items-center justify-between rounded-sm border p-4 transition-colors'>
+        <motion.div
+            layout
+            whileHover={{ y: -4, scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 180, damping: 30 }}
+            className='bg-card border-border hover:border-primary/60 flex flex-col items-center justify-between rounded-sm border p-4 transition-colors'>
             <div className='flex flex-grow flex-col items-center text-center'>
                 <div className='mb-4 flex h-20 w-full items-center justify-center'>
                     <Image
@@ -78,12 +83,22 @@ export function LogoCard({ logo }: LogoCardProps) {
                 </div>
                 <div>
                     <h3 className='text-card-foreground w-36 truncate font-semibold'>{logo.title}</h3>
-                    <Link
-                        href={`/category/${logo.categories[0].toLowerCase()}`}
-                        title={`View more ${logo.categories.join(', ')} logos`}
-                        className='text-muted-foreground inline-block text-xs hover:underline'>
-                        {logo.categories.join(', ')}
-                    </Link>
+
+                    <div className='text-muted-foreground flex h-4 items-center justify-center space-x-1 text-xs'>
+                        {logo.categories.slice(0, 2).map((category, index) => (
+                            <div key={category} className='flex items-center'>
+                                <Link
+                                    href={`/category/${category.toLowerCase()}`}
+                                    title={`View more ${category} logos`}
+                                    className='text-muted-foreground inline-block text-xs hover:underline'>
+                                    {category}
+                                </Link>
+                                {index < logo.categories.slice(0, 2).length - 1 && (
+                                    <span className='text-muted-foreground mx-1'>|</span>
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
             <div className='mt-4 flex items-center space-x-2'>
@@ -111,6 +126,6 @@ export function LogoCard({ logo }: LogoCardProps) {
                     <Download className='text-secondary-foreground h-4 w-4' />
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 }
