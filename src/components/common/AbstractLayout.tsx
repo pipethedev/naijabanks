@@ -8,11 +8,13 @@ import { Sidebar } from '@/components/common/Sidebar';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils';
 
+import { LogoCodeModal } from '../LogoCodeModal';
+
 const AbstractApp = (pageProps: React.PropsWithChildren) => {
     return (
         <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
             {/*  */}
-            <div className={cn('fixed left-0 z-[100] hidden h-screen w-[var(--sidebar-width)] lg:block')}>
+            <div className={cn('fixed left-0 z-[20] hidden h-screen w-[var(--sidebar-width)] lg:block')}>
                 <Sidebar />
             </div>
             <div className='flex h-full w-full flex-col lg:ml-[var(--sidebar-width)] lg:w-[calc(100%-var(--sidebar-width))]'>
@@ -24,6 +26,7 @@ const AbstractApp = (pageProps: React.PropsWithChildren) => {
                 </div>
             </div>
             {/*  */}
+            <LogoCodeModal />
             <Toaster />
         </ThemeProvider>
     );

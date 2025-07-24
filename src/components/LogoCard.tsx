@@ -6,11 +6,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { useToast } from '@/hooks/useToast';
+import { useModalStore } from '@/store/modalStore';
 import type { Logo } from '@/types';
 import { copyToClipboard } from '@/utils/clipboard';
 
 import { motion } from 'framer-motion';
-import { Check, Copy, Download, LinkIcon } from 'lucide-react';
+import { Check, Code, Copy, Download, LinkIcon } from 'lucide-react';
 
 interface LogoCardProps {
     logo: Logo;
@@ -19,6 +20,7 @@ interface LogoCardProps {
 export function LogoCard({ logo }: LogoCardProps) {
     const [isCopied, setIsCopied] = useState(false);
     const { toast } = useToast();
+    const { openModal } = useModalStore();
 
     const handleDownload = useCallback(() => {
         const link = document.createElement('a');
@@ -62,9 +64,9 @@ export function LogoCard({ logo }: LogoCardProps) {
     return (
         <motion.div
             layout
-            whileHover={{ y: -4, scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 180, damping: 30 }}
-            className='bg-card border-border hover:border-primary/60 flex flex-col items-center justify-between rounded-sm border p-4 transition-colors'>
+            className='bg-card border-muted hover:border-border hover:bg-muted/20 flex flex-col items-center justify-between rounded-sm border p-4 transition-colors'>
             <div className='flex flex-grow flex-col items-center text-center'>
                 <div className='mb-4 flex h-20 w-full items-center justify-center'>
                     <Image
@@ -107,6 +109,13 @@ export function LogoCard({ logo }: LogoCardProps) {
                         <LinkIcon className='text-secondary-foreground h-4 w-4' />
                     </button>
                 </a>
+                <button
+                    type='button'
+                    onClick={() => openModal(logo)}
+                    className='hover:bg-secondary rounded-md p-1.5'
+                    title='Copy SVG'>
+                    <Code className='text-secondary-foreground h-4 w-4' />
+                </button>
                 <button
                     type='button'
                     onClick={handleCopy}

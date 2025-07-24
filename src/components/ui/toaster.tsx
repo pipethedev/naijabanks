@@ -10,10 +10,9 @@ import {
 } from '@/components/design-system/toast';
 import { useToast } from '@/hooks/useToast';
 
-import IconAlertCircle from '../icon/IconAlertCircle';
-import IconCheckCircle from '../icon/IconCheckCircle';
 import { Progress } from './progress';
 import { Spinner } from './spinner';
+import { AlertCircle, CheckCircle } from 'lucide-react';
 
 export function Toaster() {
     const { toasts } = useToast();
@@ -26,13 +25,19 @@ export function Toaster() {
                         <div className='flex w-full'>
                             <div className='w-full justify-center space-y-2'>
                                 <div className='flex justify-between space-x-2'>
-                                    <div className='flex items-center space-x-2'>
+                                    <div className='flex items-center space-x-2.5'>
                                         {props?.variant && (
                                             <div className='flex h-[20px] w-[20px] items-center'>
                                                 {/* {props.variant === 'ai' && <Icons.AI className='text-[#0064D9]' />} */}
-                                                {props?.variant === 'success' && <IconCheckCircle />}
+                                                {props?.variant === 'success' && (
+                                                    <div className='rounded-full bg-green-100 p-[2px] text-green-500'>
+                                                        <CheckCircle className='h-4 w-4' />
+                                                    </div>
+                                                )}
                                                 {props?.variant === 'error' && (
-                                                    <IconAlertCircle className='text-[#FF3638]' />
+                                                    <div className='rounded-full bg-red-100 p-[2px] text-red-500'>
+                                                        <AlertCircle className='h-4 w-4' />
+                                                    </div>
                                                 )}
                                                 {props?.variant === 'progress' && (
                                                     <Spinner className='h-4 w-4 animate-spin' />

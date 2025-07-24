@@ -1,5 +1,5 @@
-import { logos } from '@/app/data/logos';
 import { LogoGrid } from '@/components/LogoGrid';
+import { logos } from '@/data/logos';
 import type { Logo } from '@/types';
 
 interface CategoryPageProps {

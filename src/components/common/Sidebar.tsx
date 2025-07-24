@@ -24,7 +24,7 @@ export async function Sidebar() {
                     className='flex items-center space-x-2 opacity-100 transition-opacity hover:opacity-80'
                     aria-label='Go to the NBL homepage'>
                     <div className='bg-primary inline-block h-[30px] w-[30px]'></div>
-                    <span className='hidden text-xl font-bold tracking-tight md:block'>NBL</span>
+                    <span className='text-muted-foreground hidden text-xl font-bold tracking-tight md:block'>NBL</span>
                 </Link>
             </div>
             <CategoryLinks categories={categories} />
