@@ -16,6 +16,14 @@
 # production
 /build
 
+# llm (if any)
+/.github/chatmodes
+/.github/copilot-commit-message-instructions.md
+/.github/copilot-instructions.md
+/.github/copilot-review-instructions.md
+/.github/copilot-instructions.md
+
+
 # misc
 .DS_Store
 *.pem
