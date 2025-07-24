@@ -105,7 +105,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}>
-                        <LogoNotFound notFoundTerm={query} />
+                        <LogoNotFound notFoundTerm={query} clearSearch={() => useSearchStore.getState().setQuery('')} />
                     </motion.div>
                 )}
             </AnimatePresence>
