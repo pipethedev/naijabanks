@@ -7,14 +7,14 @@ import Link from 'next/link';
 
 import { useToast } from '@/hooks/useToast';
 import { useModalStore } from '@/store/modalStore';
-import type { Logo } from '@/types';
+import type { ILogo, TCategory } from '@/types';
 import { copyToClipboard } from '@/utils/clipboard';
 
 import { motion } from 'framer-motion';
 import { Check, Code, Copy, Download, LinkIcon } from 'lucide-react';
 
 interface LogoCardProps {
-    logo: Logo;
+    logo: ILogo;
 }
 
 export function LogoCard({ logo }: LogoCardProps) {
@@ -87,8 +87,8 @@ export function LogoCard({ logo }: LogoCardProps) {
                     <h3 className='text-card-foreground w-36 truncate font-semibold'>{logo.title}</h3>
 
                     <div className='text-muted-foreground flex h-4 items-center justify-center space-x-1 text-xs'>
-                        {logo.categories.slice(0, 2).map((category, index) => (
-                            <div key={category} className='flex items-center'>
+                        {logo.categories.slice(0, 2).map((category: TCategory, index: number) => (
+                            <div key={`${category}-0`} className='flex items-center'>
                                 <Link
                                     href={`/category/${category.toLowerCase()}`}
                                     title={`View more ${category} logos`}

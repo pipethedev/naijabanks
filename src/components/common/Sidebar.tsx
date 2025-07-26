@@ -4,10 +4,9 @@ import Link from 'next/link';
 
 import { CategoryLinks } from '@/components/CategoryLinks';
 import { getCategories } from '@/data';
-import { Arrow } from '@radix-ui/react-select';
 
 import { GetFigmaPlugin } from '../GetFigmaPlugin';
-import { ArrowRight, HeartHandshake } from 'lucide-react';
+import { HeartHandshake } from 'lucide-react';
 
 export function Sidebar() {
     const categories = getCategories();

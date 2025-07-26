@@ -23,6 +23,9 @@
 /.github/copilot-review-instructions.md
 /.github/copilot-instructions.md
 
+# trash
+/trash
+
 
 # misc
 .DS_Store
