@@ -6,7 +6,7 @@ import { useSearchStore } from '@/store/searchStore';
 
 import { Input } from '../ui/input';
 import ThemeSwitcher from './ThemeSwitcher';
-import { ArrowUpRight, Github, Search } from 'lucide-react';
+import { ArrowUpRight, Cloud, Github, Search } from 'lucide-react';
 
 export function Header() {
     const { query, setQuery } = useSearchStore();
@@ -29,10 +29,16 @@ export function Header() {
             <div className='flex items-center gap-4'>
                 <nav className='hidden items-center gap-4 md:flex'>
                     <Link
+                        href='/docs'
+                        className='text-muted-foreground hover:text-foreground inline-flex items-center justify-center text-sm'>
+                        <Cloud size={16} className='mr-1' />
+                        <span>API</span>
+                    </Link>
+                    {/* <Link
                         href='/'
                         className='text-muted-foreground hover:text-foreground inline-flex items-center justify-center text-sm'>
-                        <span>Documentation</span> <ArrowUpRight size={16} />
-                    </Link>
+                        <span>Credits</span> <ArrowUpRight size={16} />
+                    </Link> */}
                     <Link
                         href='/'
                         className='text-muted-foreground hover:text-foreground inline-flex items-center justify-center text-sm'>

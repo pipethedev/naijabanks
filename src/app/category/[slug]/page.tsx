@@ -1,6 +1,6 @@
 import { LogoGrid } from '@/components/LogoGrid';
-import { logos } from '@/data/logos';
-import type { Logo } from '@/types';
+import { allLogos, getCategoriesSlug } from '@/data';
+import type { ILogo, TCategory } from '@/types';
 
 interface CategoryPageProps {
     params: {
@@ -8,13 +8,15 @@ interface CategoryPageProps {
     };
 }
 
-const getLogosByCategory = async (slug: string): Promise<Logo[]> => {
+const parsedLogos = JSON.parse(allLogos) as ILogo[];
+
+const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
     if (slug === 'all') {
-        return logos;
+        return parsedLogos;
     }
 
-    const filteredLogos = logos.filter((logo) =>
-        logo.categories.some((category) => category.toLowerCase().replace(/\s+/g, '-') === slug)
+    const filteredLogos = parsedLogos.filter((logo: ILogo) =>
+        logo.categories.some((category: string) => category.toLowerCase().replace(/\s+/g, '-') === slug)
     );
 
     return filteredLogos;
@@ -28,12 +30,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 }
 
 export async function generateStaticParams() {
-    const allCategories = new Set(logos.flatMap((logo) => logo.categories));
-    const slugs = Array.from(allCategories).map((category) => ({
-        slug: category.toLowerCase().replace(/\s+/g, '-')
-    }));
+    const slugs = getCategoriesSlug();
 
     slugs.unshift({ slug: 'all' });
+    console.log('Generated slugs:', slugs);
 
     return slugs;
 }

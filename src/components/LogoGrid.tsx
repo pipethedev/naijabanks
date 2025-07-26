@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { LogoCard } from '@/components/LogoCard';
 import { useSearchStore } from '@/store/searchStore';
-import type { Logo } from '@/types';
+import type { ILogo } from '@/types';
 
 import { LogoNotFound } from './LogoNotFound';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -12,7 +12,7 @@ import Fuse from 'fuse.js';
 import { ArrowUpDown, Trash2Icon } from 'lucide-react';
 
 interface LogoGridProps {
-    logos: Logo[];
+    logos: ILogo[];
 }
 
 export function LogoGrid({ logos }: LogoGridProps) {

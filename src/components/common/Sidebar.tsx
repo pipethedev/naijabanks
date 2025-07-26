@@ -1,20 +1,20 @@
+'use client';
+
 import Link from 'next/link';
 
 import { CategoryLinks } from '@/components/CategoryLinks';
+import { getCategories } from '@/data';
 
 import { GetFigmaPlugin } from '../GetFigmaPlugin';
 
-const getCategories = async () => {
-    return [
-        { name: 'All', slug: '', count: 50 },
-        { name: 'Banks', slug: 'banks', count: 25 },
-        { name: 'Fintech', slug: 'fintech', count: 15 },
-        { name: 'NGX Listed', slug: 'ngx-listed', count: 10 }
-    ];
-};
+export function Sidebar() {
+    const categories = getCategories();
 
-export async function Sidebar() {
-    const categories = await getCategories();
+    // categories.unshift({
+    //     name: '',
+    //     slug: 'all',
+    //     count: categories.reduce((acc, category) => acc + category.count, 0)
+    // });
 
     return (
         <aside className='border-border bg-background relative flex h-full w-full flex-col gap-y-6 overflow-y-auto border-r px-4 pb-6'>

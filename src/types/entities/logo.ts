@@ -1,8 +1,8 @@
-export type Category = 'Bank' | 'Fintech' | 'NGX' | 'Technology' | 'Payments';
+import type { TCategory } from '@/types';
 
 export interface ILogo {
     title: string;
-    categories: Category[];
+    categories: TCategory[];
     route: string;
     url: string;
 }

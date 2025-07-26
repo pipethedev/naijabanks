@@ -1,10 +1,12 @@
+'use client';
+
 import { CodeBlock } from '@/components/common/CodeBlock';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 import { AlertTriangle } from 'lucide-react';
 
 export default function ApiDocumentationPage() {
-    const baseUrl = 'https://api.nigerianbanklogos.com';
+    const baseUrl = 'https://api.nigerianbanklogos.xyz';
 
     const logoType = `interface Logo {
   title: string;
@@ -26,6 +28,22 @@ export default function ApiDocumentationPage() {
     "url": "https://www.accessbankplc.com/"
   },
   // ...
+]`
+        },
+        {
+            method: 'GET',
+            path: '/logos?limit=:number',
+            description:
+                'Limit the number of logos returned from the collection. The query starts from the first logo.',
+            request: '/logos?limit=10',
+            response: `[
+  {
+    "title": "Access Bank",
+    "categories": ["Bank"],
+    "route": "/logos/access-bank.svg",
+    "url": "https://www.accessbankplc.com/"
+  },
+  // ... 9 more logos
 ]`
         },
         {
