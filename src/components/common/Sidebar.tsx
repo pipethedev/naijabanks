@@ -4,8 +4,10 @@ import Link from 'next/link';
 
 import { CategoryLinks } from '@/components/CategoryLinks';
 import { getCategories } from '@/data';
+import { Arrow } from '@radix-ui/react-select';
 
 import { GetFigmaPlugin } from '../GetFigmaPlugin';
+import { ArrowRight, HeartHandshake } from 'lucide-react';
 
 export function Sidebar() {
     const categories = getCategories();
@@ -28,7 +30,16 @@ export function Sidebar() {
                 </Link>
             </div>
             <CategoryLinks categories={categories} />
-            <GetFigmaPlugin />
+            <div className='mt-auto flex w-full flex-col gap-2'>
+                <GetFigmaPlugin />
+                <p className='text-muted-foreground text-xs'>
+                    Made possible by our amazing{' '}
+                    <Link href='/contributors' className='hover:text-foreground underline'>
+                        <span className='font-semibold'>contributors</span>{' '}
+                        <HeartHandshake className='inline h-4 w-4' />
+                    </Link>
+                </p>
+            </div>
         </aside>
     );
 }

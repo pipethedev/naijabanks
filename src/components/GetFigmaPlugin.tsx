@@ -6,7 +6,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 export function GetFigmaPlugin(): JSX.Element {
     return (
-        <div className='bg-secondary/50 border-border mt-auto rounded-lg border p-4'>
+        <div className='bg-secondary/50 border-border rounded-lg border p-4'>
             <div className='flex flex-col items-start gap-4'>
                 <div className='h-10 w-10 flex-shrink-0'>
                     <ImgFigma className='h-10 w-10' />
