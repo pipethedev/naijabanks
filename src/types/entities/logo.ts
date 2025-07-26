@@ -1,6 +1,8 @@
 import type { TCategory } from '@/types';
 
 export interface ILogo {
+    id: string;
+    order: number;
     title: string;
     categories: TCategory[];
     route: string;

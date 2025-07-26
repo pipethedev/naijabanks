@@ -4,14 +4,19 @@ import { slugify } from '@/utils';
 import { logos } from './logos';
 import { v4 as uuidv4 } from 'uuid';
 
-export const logosData = logos.map((logo: ILogo) => {
-    return { id: uuidv4(), ...logo };
+type RawLogo = Omit<ILogo, 'id' | 'order'>;
+
+export const logosData: ILogo[] = (logos as RawLogo[]).map((logo: RawLogo, index) => {
+    return { ...logo, id: uuidv4(), order: index + 1 };
 });
 
 export const allLogos = JSON.stringify(logosData);
 
 export const getCategories = () => {
-    const uniqueCategories = [...new Set(logos.flatMap((logo) => logo.categories))];
+    const uniqueCategories = [...new Set<TCategory>(logos.flatMap((logo) => logo.categories))];
+    if (uniqueCategories.length === 0) {
+        return [];
+    }
 
     const categoriesWithCounts = uniqueCategories.map((category) => ({
         name: category,
@@ -19,6 +24,7 @@ export const getCategories = () => {
         count: logos.filter((logo) => logo.categories.includes(category)).length
     }));
 
+    // a-z
     categoriesWithCounts.sort((a, b) => a.name.localeCompare(b.name));
 
     return categoriesWithCounts;
@@ -26,6 +32,10 @@ export const getCategories = () => {
 
 export const getCategoriesSlug = () => {
     const uniqueCategories = new Set<string>(logos.flatMap((logo) => logo.categories));
+
+    if (uniqueCategories.size === 0) {
+        return [];
+    }
 
     const categories = Array.from(uniqueCategories).map((category) => ({
         slug: slugify(category)

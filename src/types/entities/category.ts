@@ -8,4 +8,10 @@ export type TCategory =
     | 'Regulatory Body'
     | 'Other';
 
+export interface ICategory {
+    name: TCategory;
+    slug: string;
+    count: number;
+}
+
 // WealthTech

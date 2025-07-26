@@ -17,13 +17,16 @@ interface LogoGridProps {
 
 export function LogoGrid({ logos }: LogoGridProps) {
     const { query } = useSearchStore();
-    const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+    const [sortOrder, setSortOrder] = useState<'latest' | 'alphabetical'>('latest');
 
     const fuse = useMemo(
         () =>
             new Fuse(logos, {
                 keys: ['title', 'categories'],
-                threshold: 0.3
+                threshold: 0.35,
+                ignoreLocation: true,
+                isCaseSensitive: false,
+                shouldSort: true
             }),
         [logos]
     );
@@ -32,16 +35,16 @@ export function LogoGrid({ logos }: LogoGridProps) {
         const results = query ? fuse.search(query).map((result) => result.item) : logos;
 
         return results.sort((a, b) => {
-            if (sortOrder === 'asc') {
+            if (sortOrder === 'alphabetical') {
                 return a.title.localeCompare(b.title);
             }
 
-            return b.title.localeCompare(a.title);
+            return b.order - a.order;
         });
     }, [query, logos, fuse, sortOrder]);
 
     const toggleSortOrder = () => {
-        setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+        setSortOrder((prev) => (prev === 'latest' ? 'alphabetical' : 'latest'));
     };
 
     const gridVariants = {
@@ -79,7 +82,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
                         onClick={toggleSortOrder}
                         className='text-muted-foreground hover:text-foreground flex cursor-pointer items-center text-sm'>
                         <ArrowUpDown className='mr-2 h-4 w-4' />
-                        <span>Sort {sortOrder === 'asc' ? 'A-Z' : 'Z-A'}</span>
+                        <span>{sortOrder === 'latest' ? 'Sort A-Z' : 'Sort Latest'}</span>
                     </button>
                 </div>
             )}
