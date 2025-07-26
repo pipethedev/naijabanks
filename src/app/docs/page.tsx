@@ -88,8 +88,9 @@ export default function ApiDocumentationPage() {
                 <section className='space-y-4'>
                     <h2 className='text-xl font-semibold'>Overview</h2>
                     <p className='text-muted-foreground'>
-                        The NBL API is a RESTful service that provides programmatic access to the entire collection of
-                        Nigerian brand logos available in the repository.
+                        The Nigerian Bank Logos (NBL) API provides RESTful access to a comprehensive collection of brand
+                        logos from the Nigerian financial sector, including banks, fintech, and other financial
+                        institutions.
                     </p>
                     <h3 className='pt-2 text-lg font-semibold'>Usage Guidelines</h3>
                     <p className='text-muted-foreground'>
