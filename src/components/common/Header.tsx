@@ -70,7 +70,7 @@ export function Header() {
                             value={query}
                             onKeyDown={handleInputKeyDown}
                             onChange={(e) => setQuery(e.target.value)}
-                            className='h-10 w-full rounded-[2px] py-2 pr-4 pl-10 text-sm focus:ring-0 focus:outline-none md:w-96'
+                            className='h-12 w-full rounded-[2px] py-2 pr-4 pl-10 text-sm focus:ring-0 focus:outline-none sm:h-11 md:w-96'
                         />
                         <div
                             className={cn(

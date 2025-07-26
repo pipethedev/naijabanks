@@ -6,7 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --header-height: 60px;
+    --header-height: 64px;
     --sidebar-width: 250px;
     --background: hsl(0 0% 100%);
     --foreground: hsl(0 0% 7%);

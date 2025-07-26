@@ -119,7 +119,7 @@ export function LogoCodeModal() {
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
-            <SheetContent className='p-0 sm:max-w-2xl' side='right'>
+            <SheetContent className='p-0 sm:max-w-2xl' side='bottom'>
                 {logo && (
                     <>
                         <SheetHeader className='flex-row items-center justify-between p-6 text-left'>

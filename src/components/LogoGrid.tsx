@@ -83,7 +83,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
     };
 
     return (
-        <div>
+        <div className='pb-20 md:pb-6'>
             {filteredLogos.length > 0 && (
                 <div className='mb-4 flex items-center justify-end gap-x-4'>
                     {query !== '' && (
@@ -114,7 +114,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
                         initial='hidden'
                         animate='visible'
                         exit='hidden'
-                        className='scrollbar-hide grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+                        className='scrollbar-hide grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
                         {logosToRender.map((logo) => (
                             <motion.div key={logo.title} variants={cardVariants}>
                                 <LogoCard logo={logo} />

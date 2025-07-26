@@ -9,6 +9,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils';
 
 import { LogoCodeModal } from '../LogoCodeModal';
+import { BottomBar } from './BottomBar';
 
 const AbstractApp = (pageProps: React.PropsWithChildren) => {
     return (
@@ -27,6 +28,7 @@ const AbstractApp = (pageProps: React.PropsWithChildren) => {
             </div>
             {/*  */}
             <LogoCodeModal />
+            <BottomBar />
             <Toaster />
         </ThemeProvider>
     );
