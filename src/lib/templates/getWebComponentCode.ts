@@ -1,28 +1,39 @@
+import { convertToPascalCase } from '@/utils';
+
 interface WebComponentParams {
-    name: string;
-    content: string;
+    title: string;
+    svg: string;
 }
 
-export const getWebComponentCode = (params: WebComponentParams) => {
+export const getWebComponentCode = (params: WebComponentParams): string => {
+    const className = convertToPascalCase(params.title);
+    const tagName = `${params.title.toLowerCase().replace(/\s+/g, '-')}-icon`;
+
     return `
-  class Icon${params.name} extends HTMLElement {  
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-    }
-    
-    connectedCallback() {
-      this.shadowRoot.innerHTML = /* html */ \`
-          <style>
-            svg { 
-              width: var(--size, 128px); 
-              color: var(--color, currentColor);
-            }
-          </style>
-          ${params.content}
-      \`;
-    }
+class ${className} extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
   }
-  customElements.define("icon-${params.name.toLowerCase()}", Icon${params.name});
-    `;
+
+  connectedCallback() {
+    this.shadowRoot.innerHTML = /* html */ \`
+      <style>
+        :host {
+          display: inline-block;
+          line-height: 1;
+        }
+        svg {
+          width: var(--size, 1em);
+          height: var(--size, 1em);
+          color: var(--color, currentColor);
+        }
+      </style>
+      ${params.svg.replace(/`/g, '\\`')}
+    \`;
+  }
+}
+
+customElements.define('${tagName}', ${className});
+`.trim();
 };

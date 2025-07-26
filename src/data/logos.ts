@@ -1,6 +1,6 @@
-import type { Logo } from '@/types';
+import type { ILogo } from '@/types';
 
-export const logos: Logo[] = [
+export const logos: ILogo[] = [
     {
         title: 'Access Bank',
         categories: ['Bank'],

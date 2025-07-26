@@ -2,68 +2,105 @@
 
 import { useCallback, useEffect, useState } from 'react';
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Spinner } from '@/components/ui/spinner';
 import { useToast } from '@/hooks/useToast';
-import { getAngularCode, getAstroCode, getSvelteCode, getVueCode, getWebComponentCode } from '@/lib/templates';
+import { getAstroCode, getVueCode, getWebComponentCode } from '@/lib/templates';
 import { useModalStore } from '@/store/modalStore';
+import type { TLogoCodeFormat } from '@/types';
+import { convertToPascalCase } from '@/utils';
 import { copyToClipboard } from '@/utils/clipboard';
+import { FORMAT_OPTIONS } from '@/utils/constant';
 
 import { Check, Copy, X } from 'lucide-react';
 
 const CodeBlock = ({ code }: { code: string }) => (
-    <pre className='bg-secondary overflow-x-auto rounded-md p-4 text-sm'>
+    <pre className='bg-secondary scrollbar-hide h-[calc(82vh-200px)] overflow-auto rounded-md p-4 text-sm'>
         <code>{code}</code>
     </pre>
 );
 
-type CodeFormat = 'svg' | 'jsx' | 'vue' | 'svelte' | 'astro' | 'angular' | 'web-component';
-
-const TABS: { id: CodeFormat; label: string }[] = [
-    { id: 'svg', label: 'SVG' },
-    { id: 'jsx', label: 'JSX' },
-    { id: 'vue', label: 'Vue' },
-    { id: 'svelte', label: 'Svelte' },
-    { id: 'astro', label: 'Astro' },
-    { id: 'angular', label: 'Angular' },
-    { id: 'web-component', label: 'Web Component' }
-];
+type JsxSyntax = 'tsx' | 'jsx';
 
 export function LogoCodeModal() {
     const { logo, closeModal } = useModalStore();
     const [generatedCode, setGeneratedCode] = useState<Record<string, string>>({});
-    const [activeTab, setActiveTab] = useState<CodeFormat>('svg');
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedFormat, setSelectedFormat] = useState<TLogoCodeFormat>('svg');
+    const [jsxSyntax, setJsxSyntax] = useState<JsxSyntax>('tsx');
     const [isCopied, setIsCopied] = useState(false);
     const { toast } = useToast();
 
-    useEffect(() => {
-        if (!logo) return;
+    const fetchAndGenerateCode = useCallback(
+        async (targetLogo: typeof logo, syntax: JsxSyntax) => {
+            if (!targetLogo) return;
 
-        const fetchAndGenerate = async () => {
+            const codeCacheKey = selectedFormat === 'jsx' ? `jsx_${syntax}` : selectedFormat;
+            if (generatedCode[codeCacheKey]) {
+                setIsLoading(false);
+
+                return;
+            }
+
+            setIsLoading(true);
             try {
-                const response = await fetch(logo.route);
-                const text = await response.text();
+                const svgResponse = await fetch(targetLogo.route);
+                const svgText = await svgResponse.text();
 
-                const snippets = {
-                    svg: text,
-                    // jsx: await getReactCode(logo.title, text),
-                    // vue: getVueCode(logo.title, text),
-                    // svelte: getSvelteCode(text),
-                    astro: getAstroCode(text)
-                    // angular: getAngularCode(logo.title, text)
-                    // 'web-component': getWebComponentCode(logo.title, text)
-                };
-                setGeneratedCode(snippets);
+                let newSnippets: Record<string, string> = {};
+
+                if (selectedFormat === 'jsx') {
+                    const jsxResponse = await fetch('/api/svgr', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            svg: svgText,
+                            componentName: convertToPascalCase(targetLogo.title),
+                            typescript: syntax === 'tsx'
+                        })
+                    });
+                    const { jsx } = await jsxResponse.json();
+                    newSnippets[codeCacheKey] = jsx;
+                } else {
+                    newSnippets = {
+                        svg: svgText,
+                        vue: getVueCode({
+                            lang: syntax,
+                            content: svgText
+                        }),
+                        astro: getAstroCode(svgText),
+                        'web-component': getWebComponentCode({
+                            title: targetLogo.title,
+                            svg: svgText
+                        })
+                    };
+                }
+
+                setGeneratedCode((prev) => ({ ...prev, ...newSnippets }));
             } catch (error) {
                 console.error('Failed to fetch or generate code:', error);
-                toast({ title: 'Error loading SVG content', variant: 'destructive' });
+                toast({ title: 'Error loading content', variant: 'destructive' });
+                setGeneratedCode((prev) => ({
+                    ...prev,
+                    [codeCacheKey]: 'Error loading content.'
+                }));
+            } finally {
+                setIsLoading(false);
             }
-        };
+        },
+        [generatedCode, selectedFormat, toast]
+    );
 
-        fetchAndGenerate();
-    }, [logo, toast]);
+    useEffect(() => {
+        if (logo) {
+            fetchAndGenerateCode(logo, jsxSyntax);
+        }
+    }, [logo, jsxSyntax, fetchAndGenerateCode]);
 
     const handleCopy = useCallback(async () => {
-        const content = generatedCode[activeTab];
+        const codeKey = selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat;
+        const content = generatedCode[codeKey];
         if (!content) return;
 
         try {
@@ -74,57 +111,99 @@ export function LogoCodeModal() {
         } catch (error) {
             toast({ title: 'Failed to copy', variant: 'destructive' });
         }
-    }, [activeTab, generatedCode, toast]);
+    }, [selectedFormat, jsxSyntax, generatedCode, toast]);
 
     const handleOpenChange = (open: boolean) => {
         if (!open) {
             closeModal();
-            setActiveTab('svg');
+            setSelectedFormat('svg');
+            setGeneratedCode({});
         }
     };
 
+    const currentCode = generatedCode[selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat] || '';
+
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
-            <SheetContent className='w-full p-0 sm:max-w-[640px]' side='right'>
+            <SheetContent className='p-0 sm:max-w-2xl' side='right'>
                 {logo && (
                     <>
-                        <SheetHeader className='p-6 text-left'>
-                            <SheetTitle>{logo.title}</SheetTitle>
-                            <SheetDescription>
-                                Remember to request permission from the creators for the use of the SVG. Modification is
-                                not allowed.
-                            </SheetDescription>
+                        <SheetHeader className='flex-row items-center justify-between p-6 text-left'>
+                            <div>
+                                <SheetTitle>{logo.title}</SheetTitle>
+                                <SheetDescription>Select a format and copy the code.</SheetDescription>
+                            </div>
+                            <SheetClose className='ring-offset-background focus:ring-ring data-[state=open]:bg-secondary rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none'>
+                                <X className='h-4 w-4' />
+                                <span className='sr-only'>Close</span>
+                            </SheetClose>
                         </SheetHeader>
-                        <div className='border-border scrollbar-hide overflow-x-auto border-b px-6'>
-                            <nav className='-mb-px flex space-x-2'>
-                                {TABS.map((tab) => (
+
+                        <div className='border-border flex items-center justify-between border-y px-6 py-4'>
+                            <Select
+                                value={selectedFormat}
+                                onValueChange={(v) => setSelectedFormat(v as TLogoCodeFormat)}>
+                                <SelectTrigger className='w-[180px]'>
+                                    <SelectValue placeholder='Select format' />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {FORMAT_OPTIONS.map((option) => (
+                                        <SelectItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+
+                            {selectedFormat === 'jsx' && (
+                                <div className='border-border flex items-center rounded-md border p-0.5 text-xs'>
                                     <button
                                         type='button'
-                                        key={tab.id}
-                                        onClick={() => setActiveTab(tab.id)}
-                                        className={`border-b-2 px-3 py-2 text-sm font-medium whitespace-nowrap ${
-                                            activeTab === tab.id
-                                                ? 'border-primary text-primary'
-                                                : 'text-muted-foreground hover:text-foreground border-transparent'
+                                        onClick={() => setJsxSyntax('tsx')}
+                                        className={`rounded-sm px-2 py-0.5 ${
+                                            jsxSyntax === 'tsx' ? 'bg-secondary' : ''
                                         }`}>
-                                        {tab.label}
+                                        TSX
                                     </button>
-                                ))}
-                            </nav>
+                                    <button
+                                        type='button'
+                                        onClick={() => setJsxSyntax('jsx')}
+                                        className={`rounded-sm px-2 py-0.5 ${
+                                            jsxSyntax === 'jsx' ? 'bg-secondary' : ''
+                                        }`}>
+                                        JSX
+                                    </button>
+                                </div>
+                            )}
                         </div>
-                        <div className='relative p-6'>
-                            <CodeBlock code={generatedCode[activeTab] || 'Loading...'} />
-                            <button
-                                type='button'
-                                onClick={handleCopy}
-                                className='bg-secondary hover:bg-accent absolute top-9 right-9 rounded-md p-2'>
-                                {isCopied ? <Check className='h-4 w-4 text-green-500' /> : <Copy className='h-4 w-4' />}
-                            </button>
+
+                        <div className='relative overflow-hidden p-6'>
+                            {isLoading ? (
+                                <div className='flex h-[calc(82vh-200px)] items-center justify-center'>
+                                    <Spinner size={32} />
+                                </div>
+                            ) : (
+                                <>
+                                    <CodeBlock code={currentCode} />
+                                    <button
+                                        type='button'
+                                        onClick={handleCopy}
+                                        className='bg-secondary hover:bg-accent absolute top-9 right-9 rounded-md p-2'>
+                                        {isCopied ? (
+                                            <Check className='h-4 w-4 text-green-500' />
+                                        ) : (
+                                            <Copy className='h-4 w-4' />
+                                        )}
+                                    </button>
+                                </>
+                            )}
                         </div>
-                        <SheetClose className='ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none'>
-                            <X className='h-4 w-4' />
-                            <span className='sr-only'>Close</span>
-                        </SheetClose>
+                        <div className='border-border text-muted-foreground border-t p-6 text-xs'>
+                            <p>
+                                Remember to request permission from the creators for the use of the SVG. Modification is
+                                not allowed.
+                            </p>
+                        </div>
                     </>
                 )}
             </SheetContent>
