@@ -23,11 +23,6 @@ export function CodeBlock({ code, language, className }: CodeBlockProps) {
     const { resolvedTheme } = useTheme();
     const { toast } = useToast();
     const [isCopied, setIsCopied] = useState(false);
-    const [currentStyle, setCurrentStyle] = useState(coldarkDark);
-
-    useEffect(() => {
-        setCurrentStyle(resolvedTheme === 'dark' ? coldarkDark : coldarkCold);
-    }, [resolvedTheme]);
 
     const handleCopy = async () => {
         try {
@@ -45,14 +40,17 @@ export function CodeBlock({ code, language, className }: CodeBlockProps) {
         }
     };
 
+    const syntaxTheme = resolvedTheme === 'dark' ? coldarkDark : coldarkCold;
+
     return (
         <div className={cn('bg-secondary group relative rounded-md', className)}>
             <SyntaxHighlighter
                 language={language}
-                style={currentStyle}
+                style={syntaxTheme}
                 customStyle={{
                     margin: 0,
                     padding: '1rem',
+                    background: 'transparent',
                     backgroundColor: 'transparent'
                 }}
                 codeTagProps={{

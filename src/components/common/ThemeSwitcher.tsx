@@ -1,12 +1,24 @@
 'use client';
 
+import type React from 'react';
+import { useEffect, useState } from 'react';
+
 import { useTheme } from 'next-themes';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 
 const ThemeSwitcher: React.FC = () => {
+    const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return null;
+    }
 
     return (
         <button
