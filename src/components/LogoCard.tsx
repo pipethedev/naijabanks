@@ -64,7 +64,6 @@ export function LogoCard({ logo }: LogoCardProps) {
     return (
         <motion.div
             layout
-            whileTap={{ scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 180, damping: 30 }}
             className='bg-card border-muted hover:border-border hover:bg-muted/20 flex flex-col items-center justify-between rounded-sm border p-4 transition-colors'>
             <div className='flex flex-grow flex-col items-center text-center'>

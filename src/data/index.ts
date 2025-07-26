@@ -10,7 +10,7 @@ export const logosData: ILogo[] = (logos as RawLogo[]).map((logo: RawLogo, index
     return { ...logo, id: uuidv4(), order: index + 1 };
 });
 
-export const allLogos = JSON.stringify(logosData);
+export const getAllLogos = JSON.stringify(logosData);
 
 export const getCategories = () => {
     const uniqueCategories = [...new Set<TCategory>(logos.flatMap((logo) => logo.categories))];

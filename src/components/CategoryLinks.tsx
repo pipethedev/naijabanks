@@ -13,13 +13,12 @@ interface Category {
 
 interface CategoryLinksProps {
     categories: Category[];
+    totalLogos: number;
 }
 
-export function CategoryLinks({ categories }: CategoryLinksProps) {
+export function CategoryLinks({ categories, totalLogos }: CategoryLinksProps) {
     const pathname = usePathname();
     const currentSlug = pathname.split('/').pop();
-
-    const totalLogos = categories.reduce((acc, category) => acc + category.count, 0);
 
     return (
         <nav className='flex flex-col space-y-1'>

@@ -1,6 +1,6 @@
 import { LogoGrid } from '@/components/LogoGrid';
-import { allLogos, getCategoriesSlug } from '@/data';
-import type { ILogo, TCategory } from '@/types';
+import { getAllLogos, getCategoriesSlug } from '@/data';
+import type { ILogo } from '@/types';
 
 interface CategoryPageProps {
     params: {
@@ -8,7 +8,7 @@ interface CategoryPageProps {
     };
 }
 
-const parsedLogos = JSON.parse(allLogos) as ILogo[];
+const parsedLogos = JSON.parse(getAllLogos) as ILogo[];
 
 const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
     if (slug === 'all') {

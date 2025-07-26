@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { LogoCard } from '@/components/LogoCard';
 import { useSearchStore } from '@/store/searchStore';
@@ -20,7 +20,7 @@ const INITIAL_LOAD_COUNT = 30;
 const LOAD_MORE_COUNT = 20;
 
 export function LogoGrid({ logos }: LogoGridProps) {
-    const { query, setQuery } = useSearchStore();
+    const { query } = useSearchStore();
     const [sortOrder, setSortOrder] = useState<'latest' | 'alphabetical'>('latest');
     const [visibleCount, setVisibleCount] = useState(INITIAL_LOAD_COUNT);
 

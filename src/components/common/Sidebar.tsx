@@ -3,13 +3,16 @@
 import Link from 'next/link';
 
 import { CategoryLinks } from '@/components/CategoryLinks';
-import { getCategories } from '@/data';
+import { getAllLogos, getCategories } from '@/data';
+import type { ILogo } from '@/types';
 
 import { GetFigmaPlugin } from '../GetFigmaPlugin';
 import { HeartHandshake } from 'lucide-react';
 
 export function Sidebar() {
     const categories = getCategories();
+    const allLogos = JSON.parse(getAllLogos) as ILogo[];
+    const totalLogos = allLogos.length;
 
     // categories.unshift({
     //     name: '',
@@ -28,7 +31,7 @@ export function Sidebar() {
                     <span className='text-muted-foreground hidden text-xl font-bold tracking-tight md:block'>NBL</span>
                 </Link>
             </div>
-            <CategoryLinks categories={categories} />
+            <CategoryLinks categories={categories} totalLogos={totalLogos} />
             <div className='mt-auto flex w-full flex-col gap-2'>
                 <GetFigmaPlugin />
                 <p className='text-muted-foreground text-xs'>
