@@ -27,7 +27,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
     const fuse = useMemo(
         () =>
             new Fuse(logos, {
-                keys: ['title', 'categories'],
+                keys: ['title', 'categories', 'ticker'],
                 threshold: 0.35,
                 ignoreLocation: true,
                 isCaseSensitive: false,
