@@ -86,7 +86,7 @@ export function LogoCard({ logo }: LogoCardProps) {
                 <div>
                     <h3 className='text-card-foreground w-36 truncate font-semibold'>{logo.title}</h3>
 
-                    <div className='text-muted-foreground flex h-4 items-center justify-center space-x-1 text-xs'>
+                    <div className='text-muted-foreground flex h-4 items-center justify-center text-xs'>
                         {logo.categories.slice(0, 2).map((category: TCategory, index: number) => (
                             <div key={`${category}-0`} className='flex items-center'>
                                 <Link

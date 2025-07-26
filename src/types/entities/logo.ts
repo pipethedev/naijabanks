@@ -4,6 +4,7 @@ export interface ILogo {
     id: string;
     order: number;
     title: string;
+    ticker?: string;
     categories: TCategory[];
     route: string;
     url: string;

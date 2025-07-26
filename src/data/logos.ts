@@ -3,78 +3,109 @@ import type { ILogo } from '@/types';
 type IRawLogo = Omit<ILogo, 'id' | 'order'>;
 
 export const logos: IRawLogo[] = [
-    // Commercial Banks (12)
     {
-        title: 'Access Bank',
+        title: 'Access Holdings PLC',
         categories: ['Commercial Bank'],
-        route: '/logos/access-bank.svg',
-        url: 'https://www.accessbankplc.com/'
+        route: '/logos/accesscorp.svg',
+        url: 'https://www.accessbankplc.com/',
+        ticker: 'ACCESSCORP'
     },
     {
-        title: 'GTBank',
-        categories: ['Commercial Bank'],
-        route: '/logos/gtbank.svg',
-        url: 'https://www.gtbank.com/'
+        title: 'Guaranty Trust Holding Company PLC',
+        categories: ['Commercial Bank', 'Investment'],
+        route: '/logos/gtco.svg',
+        url: 'https://www.gtcoplc.com/',
+        ticker: 'GTCO'
     },
     {
-        title: 'Zenith Bank',
+        title: 'Zenith Bank PLC',
         categories: ['Commercial Bank'],
-        route: '/logos/zenith-bank.svg',
-        url: 'https://www.zenithbank.com/'
+        route: '/logos/zenithbank.svg',
+        url: 'https://www.zenithbank.com/',
+        ticker: 'ZENITHBANK'
     },
     {
-        title: 'UBA',
+        title: 'United Bank for Africa PLC',
         categories: ['Commercial Bank'],
         route: '/logos/uba.svg',
-        url: 'https://www.ubagroup.com/'
+        url: 'https://www.ubagroup.com/',
+        ticker: 'UBA'
     },
     {
-        title: 'First Bank',
+        title: 'FBN Holdings PLC',
         categories: ['Commercial Bank'],
-        route: '/logos/first-bank.svg',
-        url: 'https://www.firstbanknigeria.com/'
+        route: '/logos/fbnh.svg',
+        url: 'https://www.fbnholdings.com/',
+        ticker: 'FBNH'
     },
     {
-        title: 'Fidelity Bank',
+        title: 'Fidelity Bank PLC',
         categories: ['Commercial Bank'],
-        route: '/logos/fidelity-bank.svg',
-        url: 'https://www.fidelitybank.ng/'
+        route: '/logos/fidelitybk.svg',
+        url: 'https://www.fidelitybank.ng/',
+        ticker: 'FIDELITYBK'
     },
     {
-        title: 'Stanbic IBTC Bank',
-        categories: ['Commercial Bank'],
-        route: '/logos/stanbic-ibtc.svg',
-        url: 'https://www.stanbicibtcbank.com/'
+        title: 'Stanbic IBTC Holdings PLC',
+        categories: ['Commercial Bank', 'Investment'],
+        route: '/logos/stanbic.svg',
+        url: 'https://www.stanbicibtc.com/',
+        ticker: 'STANBIC'
     },
     {
-        title: 'Ecobank',
+        title: 'Ecobank Transnational Incorporated',
         categories: ['Commercial Bank'],
-        route: '/logos/ecobank.svg',
-        url: 'https://ecobank.com/'
+        route: '/logos/eti.svg',
+        url: 'https://ecobank.com/',
+        ticker: 'ETI'
     },
     {
-        title: 'Sterling Bank',
+        title: 'Sterling Financial Holdings Company PLC',
         categories: ['Commercial Bank'],
-        route: '/logos/sterling-bank.svg',
-        url: 'https://sterling.ng/'
+        route: '/logos/sterlingng.svg',
+        url: 'https://sterling.ng/',
+        ticker: 'STERLINGNG'
     },
     {
-        title: 'Wema Bank',
+        title: 'Wema Bank PLC',
         categories: ['Commercial Bank'],
-        route: '/logos/wema-bank.svg',
-        url: 'https://www.wemabank.com/'
+        route: '/logos/wemabank.svg',
+        url: 'https://www.wemabank.com/',
+        ticker: 'WEMABANK'
     },
     {
-        title: 'Union Bank',
+        title: 'Union Bank of Nigeria PLC',
         categories: ['Commercial Bank'],
-        route: '/logos/union-bank.svg',
-        url: 'https://www.unionbankng.com/'
+        route: '/logos/ubn.svg',
+        url: 'https://www.unionbankng.com/',
+        ticker: 'UBN'
     },
     {
         title: 'Polaris Bank',
         categories: ['Commercial Bank'],
         route: '/logos/polaris-bank.svg',
         url: 'https://www.polarisbankltd.com/'
+    },
+    {
+        title: 'FCMB Group Plc',
+        categories: ['Commercial Bank'],
+        route: '/logos/fcmb.svg',
+        url: 'https://www.fcmb.com/',
+        ticker: 'FCMB'
+    },
+    {
+        title: 'Jaiz Bank PLC',
+        categories: ['Commercial Bank'],
+        route: '/logos/jaizbank.svg',
+        url: 'https://jaizbankplc.com/',
+        ticker: 'JAIZBANK'
+    },
+    {
+        title: 'Unity Bank PLC',
+        categories: ['Commercial Bank'],
+        route: '/logos/unitybnk.svg',
+        url: 'https://www.unitybankng.com/',
+        ticker: 'UNITYBNK'
     },
 
     // Fintech & Digital Banks (12)
@@ -151,7 +182,7 @@ export const logos: IRawLogo[] = [
         url: 'https://chippercash.com/'
     },
 
-    // Investment & WealthTech (6)
+    // Investment & WealthTech (7)
     {
         title: 'PiggyVest',
         categories: ['Fintech', 'Investment'],
@@ -188,6 +219,13 @@ export const logos: IRawLogo[] = [
         route: '/logos/chaka.svg',
         url: 'https://www.chaka.com/'
     },
+    {
+        title: 'United Capital PLC',
+        categories: ['Investment'],
+        route: '/logos/ucap.svg',
+        url: 'https://www.unitedcapitalplcgroup.com/',
+        ticker: 'UCAP'
+    },
 
     // Payment Gateways (5)
     {
@@ -215,18 +253,20 @@ export const logos: IRawLogo[] = [
         url: 'https://www.globalaccelerex.com/'
     },
     {
-        title: 'eTranzact',
-        categories: ['Payment Gateway'],
+        title: 'eTranzact International PLC',
+        categories: ['Payment Gateway', 'Fintech'],
         route: '/logos/etranzact.svg',
-        url: 'https://www.etranzact.com/'
+        url: 'https://www.etranzact.com/',
+        ticker: 'ETRANZACT'
     },
 
-    // Insurtech (6)
+    // Insurtech (8)
     {
-        title: 'AXA Mansard',
+        title: 'AXA Mansard Insurance PLC',
         categories: ['Insurtech'],
-        route: '/logos/axa-mansard.svg',
-        url: 'https://www.axamansard.com/'
+        route: '/logos/mansard.svg',
+        url: 'https://www.axamansard.com/',
+        ticker: 'MANSARD'
     },
     {
         title: 'Leadway Assurance',
@@ -235,10 +275,11 @@ export const logos: IRawLogo[] = [
         url: 'https://www.leadway.com/'
     },
     {
-        title: 'AIICO Insurance',
+        title: 'AIICO Insurance PLC',
         categories: ['Insurtech'],
         route: '/logos/aiico.svg',
-        url: 'https://www.aiicoplc.com/'
+        url: 'https://www.aiicoplc.com/',
+        ticker: 'AIICO'
     },
     {
         title: 'Casava',
@@ -257,6 +298,20 @@ export const logos: IRawLogo[] = [
         categories: ['Insurtech', 'Fintech'],
         route: '/logos/mycovergenius.svg',
         url: 'https://mycovergenius.com/'
+    },
+    {
+        title: 'NEM Insurance PLC',
+        categories: ['Insurtech'],
+        route: '/logos/nem.svg',
+        url: 'https://nem-insurance.com/',
+        ticker: 'NEM'
+    },
+    {
+        title: 'Cornerstone Insurance PLC',
+        categories: ['Insurtech'],
+        route: '/logos/cornerst.svg',
+        url: 'https://www.cornerstone.com.ng/',
+        ticker: 'CORNERST'
     },
 
     // Regulatory Bodies (4)
@@ -285,7 +340,7 @@ export const logos: IRawLogo[] = [
         url: 'https://www.pencom.gov.ng/'
     },
 
-    // Other (5)
+    // Other (NGX-listed non-financials, etc.) (10)
     {
         title: 'NIBSS',
         categories: ['Other'],
@@ -311,9 +366,45 @@ export const logos: IRawLogo[] = [
         url: 'https://amcon.com.ng/'
     },
     {
-        title: 'FMDQ',
+        title: 'FMDQ Group',
         categories: ['Other'],
         route: '/logos/fmdq.svg',
-        url: 'https://fmdqgroup.com/'
+        url: 'https://fmdqgroup.com/',
+        ticker: 'FMDQ'
+    },
+    {
+        title: 'Dangote Cement PLC',
+        categories: ['Other'],
+        route: '/logos/dangcem.svg',
+        url: 'https://www.dangotecement.com/',
+        ticker: 'DANGCEM'
+    },
+    {
+        title: 'MTN Nigeria Communications PLC',
+        categories: ['Other'],
+        route: '/logos/mtnn.svg',
+        url: 'https://www.mtn.ng/',
+        ticker: 'MTNN'
+    },
+    {
+        title: 'BUA Cement PLC',
+        categories: ['Other'],
+        route: '/logos/buacement.svg',
+        url: 'https://www.buacement.com/',
+        ticker: 'BUACEMENT'
+    },
+    {
+        title: 'BUA Foods PLC',
+        categories: ['Other'],
+        route: '/logos/buafoods.svg',
+        url: 'https://www.buafoodsplc.com/',
+        ticker: 'BUAFOODS'
+    },
+    {
+        title: 'Seplat Energy PLC',
+        categories: ['Other'],
+        route: '/logos/seplat.svg',
+        url: 'https://www.seplatenergy.com/',
+        ticker: 'SEPLAT'
     }
 ];
