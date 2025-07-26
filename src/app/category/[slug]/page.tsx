@@ -33,7 +33,6 @@ export async function generateStaticParams() {
     const slugs = getCategoriesSlug();
 
     slugs.unshift({ slug: 'all' });
-    console.log('Generated slugs:', slugs);
 
     return slugs;
 }

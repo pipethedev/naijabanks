@@ -1,9 +1,10 @@
 import { LogoGrid } from '@/components/LogoGrid';
+import type { ILogo } from '@/types';
 
-import { logos } from '../data/logos';
+import { allLogos } from '../data';
 
 export default async function HomePage() {
-    const allLogos = logos;
+    const parsedLogos = JSON.parse(allLogos) as ILogo[];
 
-    return <LogoGrid logos={allLogos} />;
+    return <LogoGrid logos={parsedLogos} />;
 }
