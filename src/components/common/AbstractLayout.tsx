@@ -22,7 +22,7 @@ const AbstractApp = (pageProps: React.PropsWithChildren) => {
                     <div className='sticky top-0 z-50 w-full'>
                         <Header />
                     </div>
-                    <main className='scrollbar-hide flex-grow p-6'>{pageProps?.children}</main>
+                    <main className='scrollbar-hide flex-grow px-[5%] py-6 sm:px-6'>{pageProps?.children}</main>
                 </div>
             </div>
             {/*  */}

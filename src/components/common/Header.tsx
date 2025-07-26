@@ -17,7 +17,7 @@ export function Header() {
     const isDocsPage = pathname === '/docs';
 
     return (
-        <header className='border-border bg-background/80 flex h-[var(--header-height)] w-full items-center justify-between border-b px-6 backdrop-blur-sm'>
+        <header className='border-border bg-background/80 flex h-[var(--header-height)] w-full items-center justify-between gap-x-4 border-b px-[5%] backdrop-blur-sm sm:px-6'>
             <div className='relative flex-1'>
                 {isDocsPage ? (
                     <Badge variant='secondary'>v1.0.0</Badge>
