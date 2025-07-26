@@ -1,13 +1,3 @@
-/**
- * Asynchronously copies text to the user's clipboard.
- * This function uses the modern Clipboard API with a fallback to the
- * deprecated `document.execCommand` for older browser compatibility.
- *
- * @param {string} text - The text to be copied to the clipboard.
- * @returns {Promise<boolean>} A promise that resolves to `true` if the copy
- * operation was successful, and `false` otherwise.
- */
-
 export const copyToClipboard = async (text: string): Promise<boolean> => {
     if (navigator.clipboard && window.isSecureContext) {
         try {

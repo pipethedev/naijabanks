@@ -1,10 +1,10 @@
-import type { Logo } from '@/types';
+import type { ILogo } from '@/types';
 
 import { create } from 'zustand';
 
 interface ModalState {
-    logo: Logo | null;
-    openModal: (logo: Logo) => void;
+    logo: ILogo | null;
+    openModal: (logo: ILogo) => void;
     closeModal: () => void;
 }
 

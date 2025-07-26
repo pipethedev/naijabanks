@@ -6,20 +6,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Spinner } from '@/components/ui/spinner';
 import { useToast } from '@/hooks/useToast';
-import { getAstroCode, getVueCode, getWebComponentCode } from '@/lib/templates';
+import { getAstroCode, getSvgSource, getVueCode, getWebComponentCode } from '@/lib/templates';
 import { useModalStore } from '@/store/modalStore';
 import type { TLogoCodeFormat } from '@/types';
 import { convertToPascalCase } from '@/utils';
-import { copyToClipboard } from '@/utils/clipboard';
 import { FORMAT_OPTIONS } from '@/utils/constant';
 
-import { Check, Copy, X } from 'lucide-react';
-
-const CodeBlock = ({ code }: { code: string }) => (
-    <pre className='bg-secondary scrollbar-hide h-[calc(82vh-200px)] overflow-auto rounded-md p-4 text-sm'>
-        <code>{code}</code>
-    </pre>
-);
+import { CodeBlock } from './common/CodeBlock';
+import { X } from 'lucide-react';
 
 type JsxSyntax = 'tsx' | 'jsx';
 
@@ -29,7 +23,6 @@ export function LogoCodeModal() {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedFormat, setSelectedFormat] = useState<TLogoCodeFormat>('svg');
     const [jsxSyntax, setJsxSyntax] = useState<JsxSyntax>('tsx');
-    const [isCopied, setIsCopied] = useState(false);
     const { toast } = useToast();
 
     const fetchAndGenerateCode = useCallback(
@@ -45,8 +38,7 @@ export function LogoCodeModal() {
 
             setIsLoading(true);
             try {
-                const svgResponse = await fetch(targetLogo.route);
-                const svgText = await svgResponse.text();
+                const svgText = await getSvgSource({ url: targetLogo.route });
 
                 let newSnippets: Record<string, string> = {};
 
@@ -98,20 +90,20 @@ export function LogoCodeModal() {
         }
     }, [logo, jsxSyntax, fetchAndGenerateCode]);
 
-    const handleCopy = useCallback(async () => {
-        const codeKey = selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat;
-        const content = generatedCode[codeKey];
-        if (!content) return;
+    // const handleCopy = useCallback(async () => {
+    //     const codeKey = selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat;
+    //     const content = generatedCode[codeKey];
+    //     if (!content) return;
 
-        try {
-            await copyToClipboard(content);
-            setIsCopied(true);
-            toast({ title: 'Copied to clipboard!' });
-            setTimeout(() => setIsCopied(false), 2000);
-        } catch (error) {
-            toast({ title: 'Failed to copy', variant: 'destructive' });
-        }
-    }, [selectedFormat, jsxSyntax, generatedCode, toast]);
+    //     try {
+    //         await copyToClipboard(content);
+    //         setIsCopied(true);
+    //         toast({ title: 'Copied to clipboard!' });
+    //         setTimeout(() => setIsCopied(false), 2000);
+    //     } catch (error) {
+    //         toast({ title: 'Failed to copy', variant: 'destructive' });
+    //     }
+    // }, [selectedFormat, jsxSyntax, generatedCode, toast]);
 
     const handleOpenChange = (open: boolean) => {
         if (!open) {
@@ -122,6 +114,8 @@ export function LogoCodeModal() {
     };
 
     const currentCode = generatedCode[selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat] || '';
+
+    const currentLanguage = selectedFormat === 'svg' ? 'xml' : selectedFormat;
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
@@ -183,19 +177,11 @@ export function LogoCodeModal() {
                                     <Spinner size={32} />
                                 </div>
                             ) : (
-                                <>
-                                    <CodeBlock code={currentCode} />
-                                    <button
-                                        type='button'
-                                        onClick={handleCopy}
-                                        className='bg-secondary hover:bg-accent absolute top-9 right-9 rounded-md p-2'>
-                                        {isCopied ? (
-                                            <Check className='h-4 w-4 text-green-500' />
-                                        ) : (
-                                            <Copy className='h-4 w-4' />
-                                        )}
-                                    </button>
-                                </>
+                                <CodeBlock
+                                    code={currentCode}
+                                    language={currentLanguage}
+                                    className='h-[calc(82vh-200px)] overflow-auto'
+                                />
                             )}
                         </div>
                         <div className='border-border text-muted-foreground border-t p-6 text-xs'>

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 
 import { useToast } from '@/hooks/useToast';
+import { cn } from '@/utils';
 import { copyToClipboard } from '@/utils/clipboard';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -15,12 +16,13 @@ import { coldarkCold, coldarkDark } from 'react-syntax-highlighter/dist/esm/styl
 interface CodeBlockProps {
     code: string;
     language?: string;
+    className?: string;
 }
 
-export function CodeBlock({ code, language }: CodeBlockProps) {
+export function CodeBlock({ code, language, className }: CodeBlockProps) {
     const { resolvedTheme } = useTheme();
-    const [isCopied, setIsCopied] = useState(false);
     const { toast } = useToast();
+    const [isCopied, setIsCopied] = useState(false);
     const [currentStyle, setCurrentStyle] = useState(coldarkDark);
 
     useEffect(() => {
@@ -44,7 +46,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
     };
 
     return (
-        <div className='bg-secondary group relative rounded-md'>
+        <div className={cn('bg-secondary group relative rounded-md', className)}>
             <SyntaxHighlighter
                 language={language}
                 style={currentStyle}
@@ -63,7 +65,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
             <button
                 type='button'
                 onClick={handleCopy}
-                className='absolute top-2 right-2 rounded-md bg-transparent p-2 opacity-0 transition-all group-hover:bg-black/10 group-hover:opacity-100 dark:group-hover:bg-white/10'
+                className='bg-secondary hover:bg-secondary/90 group-hover:bg-primary-foreground/80 absolute top-2 right-2 rounded-md border p-2 opacity-0 transition-all group-hover:opacity-100'
                 title='Copy code'>
                 <AnimatePresence initial={false} mode='wait'>
                     <motion.div
