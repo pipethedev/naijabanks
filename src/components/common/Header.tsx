@@ -57,7 +57,7 @@ export function Header() {
 
     return (
         <header className='border-border bg-background/80 flex h-[var(--header-height)] w-full items-center justify-between gap-x-4 border-b px-[5%] backdrop-blur-sm sm:px-6'>
-            <div className='relative flex-1'>
+            <div className='lg:w-max-content relative flex w-full items-center'>
                 {isDocsPage ? (
                     <Badge variant='secondary'>v1.0.0</Badge>
                 ) : (
@@ -66,15 +66,15 @@ export function Header() {
                         <Input
                             ref={inputRef}
                             type='search'
-                            placeholder='Search logos (categories, titles, tickers, etc.)'
+                            placeholder='Search logos (categories, titles, tickers, etc)'
                             value={query}
                             onKeyDown={handleInputKeyDown}
                             onChange={(e) => setQuery(e.target.value)}
-                            className='h-12 w-full rounded-[2px] py-2 pr-4 pl-10 text-sm focus:ring-0 focus:outline-none sm:h-11 md:w-96'
+                            className='h-12 w-full rounded-[2px] py-2 pr-4 pl-10 text-sm focus:ring-0 focus:outline-none sm:h-11 lg:w-[600px]'
                         />
                         <div
                             className={cn(
-                                'text-muted-foreground border-border absolute top-1/2 right-3 hidden -translate-y-1/2 items-center rounded border px-1.5 py-0.5 text-xs transition-colors md:flex',
+                                'text-muted-foreground border-border absolute top-1/2 right-3 flex -translate-y-1/2 items-center rounded border px-1.5 py-0.5 text-xs transition-colors',
                                 isCommandKPressed && 'bg-muted text-primary'
                             )}>
                             ⌘K
@@ -82,8 +82,8 @@ export function Header() {
                     </>
                 )}
             </div>
-            <div className='flex items-center gap-4'>
-                <nav className='hidden items-center gap-4 md:flex'>
+            <div className='hidden items-center gap-4 lg:flex'>
+                <nav className='flex items-center gap-4'>
                     <Link
                         href='/docs'
                         className={cn(
@@ -102,10 +102,11 @@ export function Header() {
                         href='https://github.com/Pariola-droid/Nigerian-Bank-Logos/issues/new?assignees=&labels=request&template=request-logo.md&title=Request+logo%3A+'
                         target='_blank'
                         rel='noopener noreferrer'
-                        className='text-muted-foreground hover:text-foreground inline-flex items-center justify-center text-sm'>
+                        className='text-muted-foreground hover:text-foreground inline-flex items-center justify-center text-sm whitespace-nowrap'>
                         <span>Submit logo</span> <ArrowUpRight size={16} />
                     </Link>
                 </nav>
+
                 <a
                     href='https://github.com/Pariola-droid/Nigerian-Bank-Logos'
                     target='_blank'

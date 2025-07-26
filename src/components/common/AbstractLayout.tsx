@@ -10,6 +10,7 @@ import { cn } from '@/utils';
 
 import { LogoCodeModal } from '../LogoCodeModal';
 import { BottomBar } from './BottomBar';
+import { MobileHeader } from './MobileHeader';
 
 const AbstractApp = (pageProps: React.PropsWithChildren) => {
     return (
@@ -20,6 +21,7 @@ const AbstractApp = (pageProps: React.PropsWithChildren) => {
             </div>
             <div className='flex h-full w-full flex-col lg:ml-[var(--sidebar-width)] lg:w-[calc(100%-var(--sidebar-width))]'>
                 <div className='flex flex-grow flex-col'>
+                    <MobileHeader />
                     <div className='sticky top-0 z-50 w-full'>
                         <Header />
                     </div>

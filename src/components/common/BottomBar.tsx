@@ -22,7 +22,7 @@ export function BottomBar() {
     const totalLogos = allLogos.length;
 
     return (
-        <div className='bg-background/80 fixed bottom-[-1px] z-40 w-full border-t backdrop-blur-sm md:hidden'>
+        <div className='bg-background/80 fixed bottom-[-1px] z-40 w-full border-t backdrop-blur-sm lg:hidden'>
             <div className='relative flex h-16 items-center'>
                 <div className='from-background via-background bg-background absolute top-0 left-0 z-10 flex h-full items-center justify-center border-r bg-gradient-to-r to-transparent px-2'>
                     <Drawer>

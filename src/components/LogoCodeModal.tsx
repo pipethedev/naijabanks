@@ -14,6 +14,7 @@ import { FORMAT_OPTIONS } from '@/utils/constant';
 
 import { CodeBlock } from './common/CodeBlock';
 import { X } from 'lucide-react';
+import { isMobile } from 'react-device-detect';
 
 type JsxSyntax = 'tsx' | 'jsx';
 
@@ -119,7 +120,7 @@ export function LogoCodeModal() {
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
-            <SheetContent className='p-0 sm:max-w-2xl' side='bottom'>
+            <SheetContent className='p-0 sm:max-w-2xl' side={isMobile ? 'bottom' : 'right'}>
                 {logo && (
                     <>
                         <SheetHeader className='flex-row items-center justify-between p-6 text-left'>
