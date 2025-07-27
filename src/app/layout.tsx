@@ -37,7 +37,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
                 className={cn(
                     `${GeistSans.variable} ${GeistMono.variable} ${lora.variable} font-sans`,
                     'overscroll-none whitespace-pre-line antialiased'
-                )}>
+                )}
+                suppressHydrationWarning>
                 <AbstractApp>{children}</AbstractApp>
             </body>
         </html>
