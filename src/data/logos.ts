@@ -1,6 +1,6 @@
-import type { IRawLogo } from '@/types';
+import type { TRawLogo } from '@/types';
 
-export const logos: IRawLogo[] = [
+export const logos: TRawLogo[] = [
     {
         title: 'Access Holdings PLC',
         categories: ['Commercial Bank', 'NGX'],

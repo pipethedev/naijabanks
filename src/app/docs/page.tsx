@@ -8,11 +8,11 @@ import { AlertTriangle } from 'lucide-react';
 export default function ApiDocumentationPage() {
     const baseUrl = 'https://api.nigerianbanklogos.xyz';
 
-    const logoType = `interface Logo {
+    const logoType = `interface ILogo {
   id?: string;
   order?: number;  
   title: string;
-  categories: string[];
+  categories: TCategory[];
   route: string;
   url: string;
   ticker?: string;

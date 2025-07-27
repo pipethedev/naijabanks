@@ -1,24 +1,22 @@
-import type { ILogo, TCategory } from '@/types';
+import type { ICategory, ILogo, TCategory, TRawLogo } from '@/types';
 import { slugify } from '@/utils';
 
 import { logos } from './logos';
 import { v4 as uuidv4 } from 'uuid';
 
-type RawLogo = Omit<ILogo, 'id' | 'order'>;
-
-export const logosData: ILogo[] = (logos as RawLogo[]).map((logo: RawLogo, index) => {
-    return { ...logo, id: uuidv4(), order: index + 1 };
+export const logosData: ILogo[] = (logos as TRawLogo[]).map((logo: TRawLogo, index) => {
+    return { ...logo, id: uuidv4(), order: index + 1 } as ILogo;
 });
 
 export const getAllLogos = JSON.stringify(logosData);
 
 export const getCategories = () => {
-    const uniqueCategories = [...new Set<TCategory>(logos.flatMap((logo) => logo.categories))];
+    const uniqueCategories = [...new Set<TCategory>(logos.flatMap((logo) => logo.categories))] as TCategory[];
     if (uniqueCategories.length === 0) {
         return [];
     }
 
-    const categoriesWithCounts = uniqueCategories.map((category) => ({
+    const categoriesWithCounts = uniqueCategories.map((category: TCategory) => ({
         name: category,
         slug: slugify(category),
         count: logos.filter((logo) => logo.categories.includes(category)).length
@@ -27,11 +25,11 @@ export const getCategories = () => {
     // a-z
     categoriesWithCounts.sort((a, b) => a.name.localeCompare(b.name));
 
-    return categoriesWithCounts;
+    return categoriesWithCounts as ICategory[];
 };
 
 export const getCategoriesSlug = () => {
-    const uniqueCategories = new Set<string>(logos.flatMap((logo) => logo.categories));
+    const uniqueCategories = new Set<string>(logos.flatMap((logo) => logo.categories)) as Set<TCategory>;
 
     if (uniqueCategories.size === 0) {
         return [];
@@ -41,7 +39,7 @@ export const getCategoriesSlug = () => {
         slug: slugify(category)
     }));
 
-    return categories;
+    return categories as { slug: string }[];
 };
 
 export const getLogoBySlug = (slug: string): ILogo | undefined => {
