@@ -3,77 +3,77 @@ import type { IRawLogo } from '@/types';
 export const logos: IRawLogo[] = [
     {
         title: 'Access Holdings PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/accesscorp.svg',
         url: 'https://www.accessbankplc.com/',
         ticker: 'ACCESSCORP'
     },
     {
         title: 'Guaranty Trust Holding Company PLC',
-        categories: ['Commercial Bank', 'Investment'],
+        categories: ['Commercial Bank', 'Investment', 'NGX'],
         route: '/logos/gtco.svg',
         url: 'https://www.gtcoplc.com/',
         ticker: 'GTCO'
     },
     {
         title: 'Zenith Bank PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/zenithbank.svg',
         url: 'https://www.zenithbank.com/',
         ticker: 'ZENITHBANK'
     },
     {
         title: 'United Bank for Africa PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/uba.svg',
         url: 'https://www.ubagroup.com/',
         ticker: 'UBA'
     },
     {
         title: 'FBN Holdings PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/firstholdco.svg',
         url: 'https://www.fbnholdings.com/',
         ticker: 'FBNH'
     },
     {
         title: 'Fidelity Bank PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/fidelity.svg',
         url: 'https://www.fidelitybank.ng/',
         ticker: 'FIDELITYBK'
     },
     {
         title: 'Stanbic IBTC Holdings PLC',
-        categories: ['Commercial Bank', 'Investment'],
+        categories: ['Commercial Bank', 'Investment', 'NGX'],
         route: '/logos/stanbic.svg',
         url: 'https://www.stanbicibtc.com/',
         ticker: 'STANBIC'
     },
     {
         title: 'Ecobank Transnational Incorporated',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/eti.svg',
         url: 'https://ecobank.com/',
         ticker: 'ETI'
     },
     {
         title: 'Sterling Financial Holdings Company PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/sterlingng.svg',
         url: 'https://sterling.ng/',
         ticker: 'STERLINGNG'
     },
     {
         title: 'Wema Bank PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/wemabank.svg',
         url: 'https://www.wemabank.com/',
         ticker: 'WEMABANK'
     },
     {
         title: 'Union Bank of Nigeria PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/ubn.svg',
         url: 'https://www.unionbankng.com/',
         ticker: 'UBN'
@@ -81,28 +81,28 @@ export const logos: IRawLogo[] = [
 
     {
         title: 'FCMB Group Plc',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/fcmb.svg',
         url: 'https://www.fcmb.com/',
         ticker: 'FCMB'
     },
     {
         title: 'Jaiz Bank PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/jaizbank.svg',
         url: 'https://jaizbankplc.com/',
         ticker: 'JAIZBANK'
     },
     {
         title: 'Unity Bank PLC',
-        categories: ['Commercial Bank'],
+        categories: ['Commercial Bank', 'NGX'],
         route: '/logos/unitybnk.svg',
         url: 'https://www.unitybankng.com/',
         ticker: 'UNITYBNK'
     },
     {
         title: 'eTranzact International PLC',
-        categories: ['Payment Gateway', 'Fintech'],
+        categories: ['Payment Gateway', 'NGX', 'Fintech'],
         route: '/logos/etranzact.svg',
         url: 'https://www.etranzact.com/',
         ticker: 'ETRANZACT'

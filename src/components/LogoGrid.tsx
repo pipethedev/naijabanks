@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { LogoCard } from '@/components/LogoCard';
 import { useSearchStore } from '@/store/searchStore';
@@ -67,6 +67,12 @@ export function LogoGrid({ logos }: LogoGridProps) {
         setVisibleCount((prev) => prev + LOAD_MORE_COUNT);
     };
 
+    useEffect(() => {
+        if (query === '') {
+            setVisibleCount(INITIAL_LOAD_COUNT);
+        }
+    }, [query]);
+
     const gridVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -77,10 +83,10 @@ export function LogoGrid({ logos }: LogoGridProps) {
         }
     };
 
-    const cardVariants = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1 }
-    };
+    // const cardVariants = {
+    //     hidden: { opacity: 0 },
+    //     visible: { opacity: 1 }
+    // };
 
     return (
         <div className='pb-20 md:pb-6'>
@@ -116,9 +122,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
                         exit='hidden'
                         className='scrollbar-hide grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
                         {logosToRender.map((logo) => (
-                            <motion.div key={logo.title} variants={cardVariants}>
-                                <LogoCard logo={logo} />
-                            </motion.div>
+                            <LogoCard key={logo.title} logo={logo} />
                         ))}
                     </motion.div>
                 ) : (
