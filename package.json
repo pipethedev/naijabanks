@@ -10,7 +10,9 @@
         "start": "next start",
         "lint": "next lint",
         "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+        "script:organize-logos": "ts-node --project tsconfig.scripts.json scripts/organize-logo.ts",
+        "clean": "rimraf dist"
     },
     "dependencies": {
         "@babel/preset-typescript": "^7.27.1",
@@ -104,6 +106,7 @@
         "prettier-plugin-tailwindcss": "^0.6.14",
         "tailwindcss": "^4.1.11",
         "tailwindcss-animate": "^1.0.7",
+        "ts-node": "^10.9.2",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.37.0"
     }

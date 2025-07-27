@@ -7,7 +7,6 @@ export async function POST(request: Request): Promise<NextResponse> {
     try {
         const body = await request.json();
         const { svg, componentName, typescript = true } = body;
-        const modifiedComponentName = convertToPascalCase(componentName);
 
         if (!svg || !componentName) {
             return NextResponse.json({ error: 'Missing required parameters: svg, componentName' }, { status: 400 });
@@ -22,7 +21,7 @@ export async function POST(request: Request): Promise<NextResponse> {
                 jsxRuntime: 'automatic',
                 plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx']
             },
-            { componentName: `${modifiedComponentName}` }
+            { componentName }
         );
 
         return NextResponse.json({ jsx });

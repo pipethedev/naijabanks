@@ -10,4 +10,6 @@ export interface ILogo {
     url: string;
 }
 
+export type IRawLogo = Omit<ILogo, 'id' | 'order'>;
+
 export type TLogoCodeFormat = 'svg' | 'jsx' | 'vue' | 'astro' | 'web-component';

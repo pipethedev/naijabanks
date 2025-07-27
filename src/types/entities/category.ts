@@ -13,5 +13,3 @@ export interface ICategory {
     slug: string;
     count: number;
 }
-
-// WealthTech

@@ -91,21 +91,6 @@ export function LogoCodeModal() {
         }
     }, [logo, jsxSyntax, fetchAndGenerateCode]);
 
-    // const handleCopy = useCallback(async () => {
-    //     const codeKey = selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat;
-    //     const content = generatedCode[codeKey];
-    //     if (!content) return;
-
-    //     try {
-    //         await copyToClipboard(content);
-    //         setIsCopied(true);
-    //         toast({ title: 'Copied to clipboard!' });
-    //         setTimeout(() => setIsCopied(false), 2000);
-    //     } catch (error) {
-    //         toast({ title: 'Failed to copy', variant: 'destructive' });
-    //     }
-    // }, [selectedFormat, jsxSyntax, generatedCode, toast]);
-
     const handleOpenChange = (open: boolean) => {
         if (!open) {
             closeModal();
