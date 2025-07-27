@@ -17,6 +17,7 @@ const organizeLogoAssets = async (): Promise<void> => {
             try {
                 await fs.access(destPath);
                 // file already exists in the dest dir
+                // delete the source file
                 await fs.unlink(sourcePath);
                 console.log(
                     `⚠️ Skipped
@@ -34,12 +35,11 @@ const organizeLogoAssets = async (): Promise<void> => {
                     return true;
                 } catch (moveError: any) {
                     if (moveError.code === 'ENOENT') {
-                        // Source file doesn't exist, log a warning.
                         console.warn(`⚠️ Source file not found for ${filename}, skipping.`);
 
                         return false;
                     }
-                    // Re-throw other move errors
+
                     throw moveError;
                 }
             }
