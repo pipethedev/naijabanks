@@ -1,5 +1,6 @@
 import type { ICategory, ILogo, TCategory, TRawLogo } from '@/types';
 import { slugify } from '@/utils';
+import { prependFullUrlToLogo } from '@/utils/prependFullUrl';
 
 import { logos } from './logos';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,6 +8,13 @@ import { v4 as uuidv4 } from 'uuid';
 export const logosData: ILogo[] = (logos as TRawLogo[]).map((logo: TRawLogo, index) => {
     return { ...logo, id: uuidv4(), order: index + 1 } as ILogo;
 });
+
+export const logosWithFullUrls = logosData.map((logo: TRawLogo) => {
+    return {
+        ...logo,
+        route: prependFullUrlToLogo(logo.route)
+    };
+}) as ILogo[];
 
 export const getAllLogos = JSON.stringify(logosData);
 

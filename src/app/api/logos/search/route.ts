@@ -1,13 +1,9 @@
 import { NextResponse } from 'next/server';
 
-import { logos } from '@/data/logos';
+import { logosWithFullUrls } from '@/data';
+import type { ILogo } from '@/types';
 
 import Fuse from 'fuse.js';
-
-const fuse = new Fuse(logos, {
-    keys: ['title', 'categories'],
-    threshold: 0.3
-});
 
 /**
  * @handler GET
@@ -15,6 +11,13 @@ const fuse = new Fuse(logos, {
  * @param {Request} request - The incoming request object.
  * @returns {Promise<NextResponse>} A JSON response containing the search results.
  */
+
+// Return full logo urls for each SVG path
+
+const fuse = new Fuse(logosWithFullUrls, {
+    keys: ['title', 'categories'],
+    threshold: 0.3
+});
 
 export async function GET(request: Request): Promise<NextResponse> {
     try {
@@ -25,7 +28,11 @@ export async function GET(request: Request): Promise<NextResponse> {
             return NextResponse.json({ error: 'Search query parameter "q" is required' }, { status: 400 });
         }
 
-        const results = fuse.search(query).map((result) => result.item);
+        const results = fuse.search(query).map((result) => result.item) as ILogo[];
+
+        if (results.length === 0) {
+            return NextResponse.json({ error: 'No logos found' }, { status: 404 });
+        }
 
         return NextResponse.json(results, {
             headers: {
