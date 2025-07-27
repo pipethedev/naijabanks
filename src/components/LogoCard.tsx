@@ -103,11 +103,13 @@ export function LogoCard({ logo }: LogoCardProps) {
                 </div>
             </div>
             <div className='mt-4 flex items-center space-x-2'>
-                <a href={logo.url} title={`View ${logo.title} website`} target='_blank' rel='noopener noreferrer'>
-                    <button type='button' className='hover:bg-secondary rounded-md p-1.5'>
-                        <LinkIcon className='text-secondary-foreground h-4 w-4' />
-                    </button>
-                </a>
+                {logo.url !== '' && (
+                    <a href={logo.url} title={`View ${logo.title} website`} target='_blank' rel='noopener noreferrer'>
+                        <button type='button' className='hover:bg-secondary rounded-md p-1.5'>
+                            <LinkIcon className='text-secondary-foreground h-4 w-4' />
+                        </button>
+                    </a>
+                )}
                 <button
                     type='button'
                     onClick={() => openModal(logo)}
