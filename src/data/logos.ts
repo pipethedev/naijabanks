@@ -893,13 +893,6 @@ export const logos: IRawLogo[] = [
         ticker: 'EUNISELL'
     },
     {
-        title: 'WAPIC INSURANCE PLC',
-        categories: ['Insurtech'],
-        route: '/logos/wapic.svg',
-        url: '',
-        ticker: 'WAPIC'
-    },
-    {
         title: 'TANTALIZERS PLC',
         categories: ['NGX'],
         route: '/logos/tantalizer.svg',
