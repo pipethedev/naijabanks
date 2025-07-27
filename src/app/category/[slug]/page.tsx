@@ -26,7 +26,7 @@ const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
 };
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-    const { slug } = params;
+    const { slug } = await params;
     const filteredLogos = await getLogosByCategory(slug);
 
     return (
