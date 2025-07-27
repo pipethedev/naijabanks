@@ -3,19 +3,20 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+import { API_URL, UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from './config';
+
+if (!UPSTASH_REDIS_REST_URL || !UPSTASH_REDIS_REST_TOKEN) {
     throw new Error('Upstash Redis credentials are missing. Check your environment variables.');
 }
 
 const redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL!,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN!
+    url: UPSTASH_REDIS_REST_URL,
+    token: UPSTASH_REDIS_REST_TOKEN
 });
 
-// 5req/5s
 const ratelimit = new Ratelimit({
     redis: redis,
-    limiter: Ratelimit.slidingWindow(5, '5 s'),
+    limiter: Ratelimit.slidingWindow(5, '10 s'),
     ephemeralCache: new Map(),
     analytics: true
 });
@@ -35,9 +36,7 @@ export const config = {
 export default async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
     const hostname = request.headers.get('host') ?? 'localhost';
-
-    const apiDomain = `api.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
-    const mainDomain = process.env.NEXT_PUBLIC_ROOT_DOMAIN;
+    const apiDomain = API_URL;
 
     if (hostname === apiDomain) {
         return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
