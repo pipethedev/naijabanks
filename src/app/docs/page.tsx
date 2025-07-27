@@ -9,10 +9,13 @@ export default function ApiDocumentationPage() {
     const baseUrl = 'https://api.nigerianbanklogos.xyz';
 
     const logoType = `interface Logo {
+  id?: string;
+  order?: number;  
   title: string;
   categories: string[];
   route: string;
   url: string;
+  ticker?: string;
 }`;
 
     const endpoints = [
