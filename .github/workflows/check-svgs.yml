@@ -19,11 +19,11 @@ jobs:
 
             - name: Check SVG sizes
               id: size-check
-              run: node scripts/check-size.js
+              run: node scripts/check-size/index.js
 
             - name: Fix SVG viewBox
               id: viewbox-fix
-              run: node scripts/fix-viewbox.js
+              run: node scripts/fix-viewbox/index.js
 
             - name: Commit fixed files
               if: steps.viewbox-fix.outputs.message != '✅ All SVGs have a viewBox.'

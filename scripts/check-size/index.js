@@ -9,9 +9,9 @@ const sizeLimit = 24576; // 24kb;
 
 function convertBytes(bytes, format = 'KB') {
     if (format === 'KB') {
-        return `(${bytes} / 1024).toFixed(2) + ' KB'`;
+        return `${(bytes / 1024).toFixed(2)} KB`;
     } else if (format === 'MB') {
-        return `(${bytes} / (1024 * 1024)).toFixed(2) + ' MB'`;
+        return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
     } else {
         return 'Invalid format. Use "KB" or "MB".';
     }
