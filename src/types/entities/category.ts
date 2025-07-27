@@ -6,7 +6,7 @@ export type TCategory =
     | 'Insurtech'
     | 'Investment'
     | 'Regulatory Body'
-    | 'Other';
+    | 'NGX';
 
 export interface ICategory {
     name: TCategory;

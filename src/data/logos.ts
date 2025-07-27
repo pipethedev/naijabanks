@@ -109,35 +109,35 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'Dangote Cement PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/dangcem.svg',
         url: 'https://www.dangotecement.com/',
         ticker: 'DANGCEM'
     },
     {
         title: 'MTN Nigeria Communications PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/mtnn.svg',
         url: 'https://www.mtn.ng/',
         ticker: 'MTNN'
     },
     {
         title: 'BUA Cement PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/buacement.svg',
         url: 'https://www.buacement.com/',
         ticker: 'BUACEMENT'
     },
     {
         title: 'BUA Foods PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/buafoods.svg',
         url: 'https://www.buafoodsplc.com/',
         ticker: 'BUAFOODS'
     },
     {
         title: 'Seplat Energy PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/seplat.svg',
         url: 'https://www.seplatenergy.com/',
         ticker: 'SEPLAT'
@@ -151,14 +151,14 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'ABC Transport PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/abctrans.svg',
         url: 'https://www.abctransport.com/',
         ticker: 'ABCTRANS'
     },
     {
         title: 'Academy Press PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/academy.svg',
         url: 'http://www.academypress-plc.com/',
         ticker: 'ACADEMY'
@@ -172,84 +172,84 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'Africa Prudential PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/afriprud.svg',
         url: 'https://africaprudential.com/',
         ticker: 'AFRIPRUD'
     },
     {
         title: 'Afromedia PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/afromedia.svg',
         url: 'http://www.afromediaplc.com/',
         ticker: 'AFROMEDIA'
     },
     {
         title: 'Airtel Africa PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/airtelafri.svg',
         url: 'https://airtel.africa/',
         ticker: 'AIRTELAFRI'
     },
     {
         title: 'Berger Paints Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/berger.svg',
         url: 'https://bergerpaintsnig.com/',
         ticker: 'BERGER'
     },
     {
         title: 'Beta Glass PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/betaglas.svg',
         url: 'https://www.beta-glass.com/',
         ticker: 'BETAGLAS'
     },
     {
         title: 'Cadbury Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/cadbury.svg',
         url: 'https://www.cadburynigeria.com/',
         ticker: 'CADBURY'
     },
     {
         title: 'CAP PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/cap-plc.svg',
         url: 'https://www.capplc.com/',
         ticker: 'CAP'
     },
     {
         title: 'Caverton Offshore Support Group PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/caverton.svg',
         url: 'https://www.caverton-offshore.com/',
         ticker: 'CAVERTON'
     },
     {
         title: 'Champion Breweries PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/champion.svg',
         url: 'https://championbreweries.com/',
         ticker: 'CHAMPION'
     },
     {
         title: 'Chams Holding Company PLC',
-        categories: ['Other', 'Fintech'],
+        categories: ['NGX', 'Fintech'],
         route: '/logos/chams.svg',
         url: 'https://chamsplc.com/',
         ticker: 'CHAMS'
     },
     {
         title: 'C & I Leasing PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/cileasing.svg',
         url: 'https://www.c-ileasing.com/',
         ticker: 'CILEASING'
     },
     {
         title: 'Conoil PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/conoil.svg',
         url: 'http://www.conoilplc.com/',
         ticker: 'CONOIL'
@@ -263,91 +263,91 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'Cutix PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/cutix.svg',
         url: 'https://www.cutixplc.com.ng/',
         ticker: 'CUTIX'
     },
     {
         title: 'CWG PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/cwg.svg',
         url: 'https://cwg-plc.com/',
         ticker: 'CWG'
     },
     {
         title: 'Dangote Sugar Refinery PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/dangsugar.svg',
         url: 'https://www.dangotesugar.com.ng/',
         ticker: 'DANGSUGAR'
     },
     {
         title: 'Eterna PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/eterna.svg',
         url: 'https://www.eternaplc.com/',
         ticker: 'ETERNA'
     },
     {
         title: 'Fidson Healthcare PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/fidson.svg',
         url: 'https://www.fidson.com/',
         ticker: 'FIDSON'
     },
     {
         title: 'Geregu Power PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/geregu.svg',
         url: 'https://geregupowerplc.com/',
         ticker: 'GEREGU'
     },
     {
         title: 'Guinness Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/guinness.svg',
         url: 'https://www.guinness-nigeria.com/',
         ticker: 'GUINNESS'
     },
     {
         title: 'Honeywell Flour Mills PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/honyflour.svg',
         url: 'https://www.honeywellflour.com/',
         ticker: 'HONYFLOUR'
     },
     {
         title: 'Ikeja Hotel PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/ikejahotel.svg',
         url: 'https://ikejahotelplc.com/',
         ticker: 'IKEJAHOTEL'
     },
     {
         title: 'International Breweries PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/intbrew.svg',
         url: 'https://www.ab-inbev.com/',
         ticker: 'INTBREW'
     },
     {
         title: 'Japaul Gold & Ventures PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/japaulgold.svg',
         url: 'https://japaulgroup.com/',
         ticker: 'JAPAULGOLD'
     },
     {
         title: 'Julius Berger Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/jberger.svg',
         url: 'https://www.julius-berger.com/',
         ticker: 'JBERGER'
     },
     {
         title: 'Lafarge Africa PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/wapco.svg',
         url: 'https://www.lafarge.com.ng/',
         ticker: 'WAPCO'
@@ -361,63 +361,63 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'Livestock Feeds PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/livestock.svg',
         url: 'http://www.livestockfeedsplc.com/',
         ticker: 'LIVESTOCK'
     },
     {
         title: 'May & Baker Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/maybaker.svg',
         url: 'https://www.may-baker.com/',
         ticker: 'MAYBAKER'
     },
     {
         title: 'MRS Oil Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/mrs.svg',
         url: 'https://mrsholdings.com/',
         ticker: 'MRS'
     },
     {
         title: 'NAHCO Aviance PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/nahco.svg',
         url: 'https://www.nahcoaviance.com/',
         ticker: 'NAHCO'
     },
     {
         title: 'NASCON Allied Industries PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/nascon.svg',
         url: 'https://www.nasconplc.com/',
         ticker: 'NASCON'
     },
     {
         title: 'Nigerian Breweries PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/nb.svg',
         url: 'https://nbplc.com/',
         ticker: 'NB'
     },
     {
         title: 'Neimeth International Pharmaceuticals PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/neimeth.svg',
         url: 'https://www.neimethplc.com.ng/',
         ticker: 'NEIMETH'
     },
     {
         title: 'Nestle Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/nestle.svg',
         url: 'https://www.nestle-cwa.com/en/nigeria',
         ticker: 'NESTLE'
     },
     {
         title: 'NGX Group PLC',
-        categories: ['Investment', 'Other'],
+        categories: ['Investment', 'NGX'],
         route: '/logos/ngxgroup.svg',
         url: 'https://ngxgroup.com/',
         ticker: 'NGXGROUP'
@@ -431,84 +431,84 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'Oando PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/oando.svg',
         url: 'https://www.oandoplc.com/',
         ticker: 'OANDO'
     },
     {
         title: 'Okomu Oil Palm PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/okomuoil.svg',
         url: 'https://www.okomunigeria.com/',
         ticker: 'OKOMUOIL'
     },
     {
         title: 'Presco PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/presco.svg',
         url: 'https://www.presco-plc.com/',
         ticker: 'PRESCO'
     },
     {
         title: 'PZ Cussons Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/pz.svg',
         url: 'https://www.pzcussons.com/nigeria/',
         ticker: 'PZ'
     },
     {
         title: 'Red Star Express PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/redstarex.svg',
         url: 'https://redstarplc.com/',
         ticker: 'REDSTAREX'
     },
     {
         title: 'Transcorp Hotels PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/transcohot.svg',
         url: 'https://www.transcorphotels.com/',
         ticker: 'TRANSCOHOT'
     },
     {
         title: 'Transnational Corporation of Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/transcorp.svg',
         url: 'https://www.transcorpgroup.com/',
         ticker: 'TRANSCORP'
     },
     {
         title: 'UAC of Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/uacn.svg',
         url: 'https://www.uacnofnigeria.com/',
         ticker: 'UACN'
     },
     {
         title: 'Unilever Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/unilever.svg',
         url: 'https://www.unilever-ewa.com/countries/nigeria/',
         ticker: 'UNILEVER'
     },
     {
         title: 'UPDC PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/updc.svg',
         url: 'https://www.updcplc.com/',
         ticker: 'UPDC'
     },
     {
         title: 'Vitafoam Nigeria PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/vitafoam.svg',
         url: 'https://www.vitafoamng.com/',
         ticker: 'VITAFOAM'
     },
     {
         title: 'ARADEL HOLDINGS PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/aradel.svg',
         url: '',
         ticker: 'ARADEL'
@@ -522,14 +522,14 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'AUSTIN LAZ & COMPANY PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/austinlaz.svg',
         url: '',
         ticker: 'AUSTINLAZ'
     },
     {
         title: 'CHELLARAMS PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/chellaram.svg',
         url: '',
         ticker: 'CHELLARAM'
@@ -543,7 +543,7 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'DAAR COMMUNICATIONS PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/daarcomm.svg',
         url: '',
         ticker: 'DAARCOMM'
@@ -557,35 +557,35 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'EKOCORP PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/ekocorp.svg',
         url: '',
         ticker: 'EKOCORP'
     },
     {
         title: 'ELLAH LAKES PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/ellahlakes.svg',
         url: '',
         ticker: 'ELLAHLAKES'
     },
     {
         title: 'ENAMELWARE PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/enamelwa.svg',
         url: '',
         ticker: 'ENAMELWA'
     },
     {
         title: 'FTN COCOA PROCESSORS PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/ftncocoa.svg',
         url: '',
         ticker: 'FTNCOCOA'
     },
     {
         title: 'GOLDEN GUINEA BREW. PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/goldbrew.svg',
         url: '',
         ticker: 'GOLDBREW'
@@ -599,14 +599,14 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'JOHN HOLT PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/johnholt.svg',
         url: '',
         ticker: 'JOHNHOLT'
     },
     {
         title: 'JULI PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/juli.svg',
         url: '',
         ticker: 'JULI'
@@ -620,7 +620,7 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'LEARN AFRICA PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/learnafrca.svg',
         url: '',
         ticker: 'LEARNAFRCA'
@@ -634,28 +634,28 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'MCNICHOLS PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/mcnichols.svg',
         url: '',
         ticker: 'MCNICHOLS'
     },
     {
         title: 'MECURE INDUSTRIES PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/mecure.svg',
         url: '',
         ticker: 'MECURE'
     },
     {
         title: 'MEYER PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/meyer.svg',
         url: '',
         ticker: 'MEYER'
     },
     {
         title: 'MORISON INDUSTRIES PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/morison.svg',
         url: '',
         ticker: 'MORISON'
@@ -670,42 +670,42 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'NCR (NIGERIA) PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/ncr.svg',
         url: '',
         ticker: 'NCR'
     },
     {
         title: 'NORTHERN NIGERIA FLOUR MILLS PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/nnfm.svg',
         url: '',
         ticker: 'NNFM'
     },
     {
         title: 'NSL TECH PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/nsltech.svg',
         url: '',
         ticker: 'NSLTECH'
     },
     {
         title: 'OMATEK VENTURES PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/omatek.svg',
         url: '',
         ticker: 'OMATEK'
     },
     {
         title: 'PHARMA-DEKO PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/pharmdeko.svg',
         url: '',
         ticker: 'PHARMDEKO'
     },
     {
         title: 'PREMIER PAINTS PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/prempaints.svg',
         url: '',
         ticker: 'PREMPAINTS'
@@ -719,7 +719,7 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'R T BRISCOE PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/rtbriscoe.svg',
         url: '',
         ticker: 'RTBRISCOE'
@@ -740,35 +740,35 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'Aluminum Extrusion IND PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/alex.svg',
         url: '',
         ticker: 'ALEX'
     },
     {
         title: 'SCOA NIG PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/scoa.svg',
         url: '',
         ticker: 'SCOA'
     },
     {
         title: 'AVA Infastructure Fund',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/avaif.svg',
         url: '',
         ticker: 'AVAIF'
     },
     {
         title: 'Briclinks Africa PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/baplc.svg',
         url: '',
         ticker: 'BAPLC'
     },
     {
         title: 'DN TYRE & RUBBER PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/dunlop.svg',
         url: '',
         ticker: 'DUNLOP'
@@ -782,21 +782,21 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'RONCHESS GLOBAL RESOURCES PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/ronchess.svg',
         url: '',
         ticker: 'RONCHESS'
     },
     {
         title: 'UNION DICON SALT PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/uniondicon.svg',
         url: '',
         ticker: 'UNIONDICON'
     },
     {
         title: 'SKYWAY AVIATION HANDLING COMPANY PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/skyavn.svg',
         url: '',
         ticker: 'SKYAVN'
@@ -810,7 +810,7 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'HALDANE MCCALL PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/hmcall.svg',
         url: '',
         ticker: 'HMCALL'
@@ -831,7 +831,7 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'SMART PRODUCTS NIGERIA PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/smurfit.svg',
         url: '',
         ticker: 'SMURFIT'
@@ -845,7 +845,7 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'GREIF NIGERIA PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/vanleer.svg',
         url: '',
         ticker: 'VANLEER'
@@ -880,14 +880,14 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'MULTI-TREX INTEGRATED FOODS PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/multitrex.svg',
         url: '',
         ticker: 'MULTITREX'
     },
     {
         title: 'EUNISELL INTERLINKED PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/eunisell.svg',
         url: '',
         ticker: 'EUNISELL'
@@ -901,35 +901,35 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'TANTALIZERS PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/tantalizer.svg',
         url: '',
         ticker: 'TANTALIZER'
     },
     {
         title: 'THOMAS WYATT NIG. PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/thomaswy.svg',
         url: '',
         ticker: 'THOMASWY'
     },
     {
         title: 'TOTALENERGIES MARKETING NIGERIA PLC',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/total.svg',
         url: '',
         ticker: 'TOTAL'
     },
     {
         title: 'TRANS-NATIONWIDE EXPRESS PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/transexpr.svg',
         url: '',
         ticker: 'TRANSEXPR'
     },
     {
         title: 'TRIPPLE GEE & COMPANY PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/trippleg.svg',
         url: '',
         ticker: 'TRIPPLEG'
@@ -943,7 +943,7 @@ export const logos: IRawLogo[] = [
     },
     {
         title: 'UNIVERSITY PRESS PLC.',
-        categories: ['Other'],
+        categories: ['NGX'],
         route: '/logos/upl.svg',
         url: '',
         ticker: 'UPL'
