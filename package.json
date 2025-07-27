@@ -1,9 +1,24 @@
 {
     "name": "nigerian-bank-logos",
     "version": "1.0.0",
+    "description": "A collection of logos for Nigerian banks and financial institutions",
+    "keywords": [
+        "nigerian",
+        "bank",
+        "logos",
+        "financial",
+        "institutions",
+        "svg",
+        "icons"
+    ],
+    "author": "@Pariola-droid",
     "private": false,
     "website": "https://nigerianbanklogos.xyz",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pariola/nigerian-bank-logos.git"
+    },
     "scripts": {
         "dev": "next dev --turbopack",
         "build": "next build",
@@ -12,6 +27,8 @@
         "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
         "script:organize-logos": "ts-node --project tsconfig.scripts.json scripts/organize-logo.ts",
+        "script:check-svg-size": "node scripts/check-size/index.js",
+        "script:fix-viewbox": "node scripts/fix-viewbox/index.js",
         "clean": "rimraf dist"
     },
     "dependencies": {

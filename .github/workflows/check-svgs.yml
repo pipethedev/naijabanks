@@ -1,0 +1,35 @@
+name: Check SVGs
+
+on:
+    pull_request:
+        paths:
+            - 'public/logos/**.svg'
+
+jobs:
+    check-quality:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+
+            - name: Check SVG sizes
+              id: size-check
+              run: node scripts/check-size.js
+
+            - name: Fix SVG viewBox
+              id: viewbox-fix
+              run: node scripts/fix-viewbox.js
+
+            - name: Commit fixed files
+              if: steps.viewbox-fix.outputs.message != '✅ All SVGs have a viewBox.'
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git add public/logos/
+                  git commit -m "build: automatically fix svg viewbox"
+                  git push
