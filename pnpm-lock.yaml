@@ -107,6 +107,9 @@ importers:
       '@svgr/core':
         specifier: ^8.1.0
         version: 8.1.0(typescript@5.8.3)
+      '@svgr/plugin-jsx':
+        specifier: ^8.1.0
+        version: 8.1.0(@svgr/core@8.1.0(typescript@5.8.3))
       '@svgr/plugin-prettier':
         specifier: ^8.1.0
         version: 8.1.0(@svgr/core@8.1.0(typescript@5.8.3))
@@ -234,9 +237,6 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^15.4.1
         version: 15.4.3
-      '@svgr/plugin-jsx':
-        specifier: ^8.1.0
-        version: 8.1.0(@svgr/core@8.1.0(typescript@5.8.3))
       '@tailwindcss/postcss':
         specifier: ^4.1.11
         version: 4.1.11
