@@ -67,11 +67,11 @@ export function LogoGrid({ logos }: LogoGridProps) {
         setVisibleCount((prev) => prev + LOAD_MORE_COUNT);
     };
 
-    useEffect(() => {
-        if (query === '') {
-            setVisibleCount(INITIAL_LOAD_COUNT);
-        }
-    }, [query]);
+    // useEffect(() => {
+    //     if (query === '') {
+    //         setVisibleCount(INITIAL_LOAD_COUNT);
+    //     }
+    // }, [query]);
 
     const gridVariants = {
         hidden: { opacity: 0 },
