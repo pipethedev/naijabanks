@@ -12,10 +12,8 @@ import Fuse from 'fuse.js';
  * @returns {Promise<NextResponse>} A JSON response containing the search results.
  */
 
-// Return full logo urls for each SVG path
-
 const fuse = new Fuse(logosWithFullUrls, {
-    keys: ['title', 'categories'],
+    keys: ['title', 'categories', 'ticker'],
     threshold: 0.3
 });
 

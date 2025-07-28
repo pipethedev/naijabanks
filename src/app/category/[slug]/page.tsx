@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { type JSX, Suspense } from 'react';
 
 import { LogoGrid } from '@/components/LogoGrid';
 import { SuspenseFallback } from '@/components/common/SuspenseFallback';
@@ -25,8 +25,8 @@ const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
     return filteredLogos;
 };
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
-    const { slug } = await params;
+export default async function CategoryPage({ params }: CategoryPageProps): Promise<JSX.Element> {
+    const { slug } = params;
     const filteredLogos = await getLogosByCategory(slug);
 
     return (
@@ -36,7 +36,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     );
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
     const slugs = getCategoriesSlug();
 
     slugs.unshift({ slug: 'all' });

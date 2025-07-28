@@ -6,13 +6,13 @@ import type { ICategory } from '@/types';
 /**
  * @handler GET
  * @description API endpoint to retrieve all logo categories.
- * @param {Request} request - The incoming request object (unused).
+ * @param {Request} _request - The incoming request object (unused).
  * @returns {Promise<NextResponse>} A JSON response containing the list of categories.
  * This endpoint returns an array of categories, each with a name, slug, and count of logos.
  * The response includes CORS headers to allow cross-origin requests and caching headers for performance.
  */
 
-export async function GET(request: Request): Promise<NextResponse> {
+export async function GET(_request: Request): Promise<NextResponse> {
     try {
         const categories = getCategories();
 
