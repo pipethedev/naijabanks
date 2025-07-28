@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useTheme } from 'next-themes';
 
@@ -47,11 +47,14 @@ export function CodeBlock({ code, language, className }: CodeBlockProps) {
             <SyntaxHighlighter
                 language={language}
                 style={syntaxTheme}
+                wrapLongLines
                 customStyle={{
                     margin: 0,
                     padding: '1rem',
                     background: 'transparent',
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'transparent',
+                    fontSize: '0.95rem',
+                    lineHeight: 1.6
                 }}
                 codeTagProps={{
                     style: {
