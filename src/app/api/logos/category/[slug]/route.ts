@@ -1,17 +1,16 @@
 import { NextResponse } from 'next/server';
 
-import { logos } from '@/data/logos';
+import { logosData } from '@/data';
 import type { ILogo } from '@/types';
 
 /**
  * @handler GET
  * @description API endpoint to retrieve logos filtered by a specific category.
- * @param {Request} _request - The incoming request object (unused).
  * @param {{ params: { slug: string } }} context - The context object containing dynamic route parameters.
  * @returns {Promise<NextResponse>} A JSON response containing the filtered array of logos.
  */
 
-export async function GET(_request: Request, { params }: { params: { slug: string } }): Promise<NextResponse> {
+export async function GET({ params }: { params: { slug: string } }): Promise<NextResponse> {
     try {
         const { slug } = await params;
 
@@ -19,7 +18,7 @@ export async function GET(_request: Request, { params }: { params: { slug: strin
             return NextResponse.json({ error: 'Category slug is required' }, { status: 400 });
         }
 
-        const filteredLogos = logos.filter((logo) =>
+        const filteredLogos: ILogo[] = logosData.filter((logo: ILogo) =>
             logo.categories.some((category) => category.toLowerCase().replace(/\s+/g, '-') === slug)
         );
 

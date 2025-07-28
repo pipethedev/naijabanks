@@ -11,19 +11,19 @@ export async function POST(request: Request): Promise<NextResponse> {
             return NextResponse.json({ error: 'Missing required parameters: svg, componentName' }, { status: 400 });
         }
 
-        const jsx = await transform(
+        const generatedJsx = await transform(
             svg,
             {
                 typescript: typescript,
                 icon: true,
                 titleProp: true,
                 jsxRuntime: 'automatic',
-                plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx']
+                plugins: ['@svgr/plugin-jsx', '@svgr/plugin-svgo', '@svgr/plugin-prettier']
             },
             { componentName }
         );
 
-        return NextResponse.json({ jsx });
+        return NextResponse.json({ generatedJsx }, { status: 200 });
     } catch (error) {
         console.error('SVGR API Error:', error);
 

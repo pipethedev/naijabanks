@@ -1,4 +1,7 @@
+import { Suspense } from 'react';
+
 import { LogoGrid } from '@/components/LogoGrid';
+import { SuspenseFallback } from '@/components/common/SuspenseFallback';
 import { getAllLogos, getCategoriesSlug } from '@/data';
 import type { ILogo } from '@/types';
 
@@ -23,10 +26,14 @@ const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
 };
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-    const { slug } = params;
+    const { slug } = await params;
     const filteredLogos = await getLogosByCategory(slug);
 
-    return <LogoGrid logos={filteredLogos} />;
+    return (
+        <Suspense fallback={<SuspenseFallback />}>
+            <LogoGrid logos={filteredLogos} />
+        </Suspense>
+    );
 }
 
 export async function generateStaticParams() {

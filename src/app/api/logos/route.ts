@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { logos } from '@/data/logos';
+import { logosWithFullUrls } from '@/data';
 
 /**
  * @handler GET
@@ -18,9 +18,8 @@ export async function GET(request: Request): Promise<NextResponse> {
         const { searchParams } = new URL(request.url);
         const limit = searchParams.get('limit');
 
-        // const allLogos = await db.query.logos.findMany();
         if (limit) {
-            const limitedLogos = logos.slice(0, parseInt(limit, 10));
+            const limitedLogos = logosWithFullUrls.slice(0, parseInt(limit, 10));
 
             return NextResponse.json(limitedLogos, {
                 headers: {
@@ -30,7 +29,7 @@ export async function GET(request: Request): Promise<NextResponse> {
             });
         }
 
-        return NextResponse.json(logos, {
+        return NextResponse.json(logosWithFullUrls, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Cache-Control': 's-maxage=3600, stale-while-revalidate'

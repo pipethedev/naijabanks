@@ -99,7 +99,7 @@ export function Header() {
                         <span>Credits</span> <ArrowUpRight size={16} />
                     </Link> */}
                     <Link
-                        href='https://github.com/Pariola-droid/Nigerian-Bank-Logos/issues/new?assignees=&labels=request&template=request-logo.md&title=Request+logo%3A+'
+                        href='https://github.com/Pariola-droid/Nigerian-Bank-Logos/?tab=readme-ov-file#-getting-started'
                         target='_blank'
                         rel='noopener noreferrer'
                         className='text-muted-foreground hover:text-foreground inline-flex items-center justify-center text-sm whitespace-nowrap'>

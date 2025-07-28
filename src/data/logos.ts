@@ -1,6 +1,6 @@
-import type { IRawLogo } from '@/types';
+import type { TRawLogo } from '@/types';
 
-export const logos: IRawLogo[] = [
+export const logos: TRawLogo[] = [
     {
         title: 'Access Holdings PLC',
         categories: ['Commercial Bank', 'NGX'],
@@ -891,13 +891,6 @@ export const logos: IRawLogo[] = [
         route: '/logos/eunisell.svg',
         url: '',
         ticker: 'EUNISELL'
-    },
-    {
-        title: 'WAPIC INSURANCE PLC',
-        categories: ['Insurtech'],
-        route: '/logos/wapic.svg',
-        url: '',
-        ticker: 'WAPIC'
     },
     {
         title: 'TANTALIZERS PLC',

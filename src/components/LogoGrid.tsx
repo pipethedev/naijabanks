@@ -67,12 +67,6 @@ export function LogoGrid({ logos }: LogoGridProps) {
         setVisibleCount((prev) => prev + LOAD_MORE_COUNT);
     };
 
-    // useEffect(() => {
-    //     if (query === '') {
-    //         setVisibleCount(INITIAL_LOAD_COUNT);
-    //     }
-    // }, [query]);
-
     const gridVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -113,7 +107,7 @@ export function LogoGrid({ logos }: LogoGridProps) {
                 </div>
             )}
             <AnimatePresence mode='wait'>
-                {logosToRender.length > 0 ? (
+                {logosToRender && logosToRender.length > 0 ? (
                     <motion.div
                         key='logo-grid'
                         variants={gridVariants}
