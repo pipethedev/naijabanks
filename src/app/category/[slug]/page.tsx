@@ -6,9 +6,7 @@ import { getAllLogos, getCategoriesSlug } from '@/data';
 import type { ILogo } from '@/types';
 
 interface CategoryPageProps {
-    params: {
-        slug: string;
-    };
+    params: Promise<{ slug: string }>;
 }
 
 const parsedLogos = JSON.parse(getAllLogos) as ILogo[];
@@ -26,7 +24,7 @@ const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
 };
 
 export default async function CategoryPage({ params }: CategoryPageProps): Promise<JSX.Element> {
-    const { slug } = params;
+    const { slug } = await params;
     const filteredLogos = await getLogosByCategory(slug);
 
     return (
