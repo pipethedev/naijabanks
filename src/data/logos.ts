@@ -71,14 +71,13 @@ export const logos: TRawLogo[] = [
         url: 'https://www.wemabank.com/',
         ticker: 'WEMABANK'
     },
-    {
-        title: 'Union Bank of Nigeria PLC',
-        categories: ['Commercial Bank', 'NGX'],
-        route: '/library/ubn.svg',
-        url: 'https://www.unionbankng.com/',
-        ticker: 'UBN'
-    },
-
+    // {
+    //     title: 'Union Bank of Nigeria PLC',
+    //     categories: ['Commercial Bank', 'NGX'],
+    //     route: '/library/ubn.svg',
+    //     url: 'https://www.unionbankng.com/',
+    //     ticker: 'UBN'
+    // },
     {
         title: 'FCMB Group Plc',
         categories: ['Commercial Bank', 'NGX'],

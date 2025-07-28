@@ -19,7 +19,7 @@ interface CodeBlockProps {
     className?: string;
 }
 
-export function CodeBlock({ code, language, className }: CodeBlockProps) {
+export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, className }) => {
     const { resolvedTheme } = useTheme();
     const { toast } = useToast();
     const [isCopied, setIsCopied] = useState(false);
@@ -85,4 +85,4 @@ export function CodeBlock({ code, language, className }: CodeBlockProps) {
             </button>{' '}
         </div>
     );
-}
+};
