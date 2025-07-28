@@ -7,14 +7,19 @@ import { slugify } from '@/utils';
 /**
  * @handler GET
  * @description API endpoint to retrieve logos filtered by a specific category.
- * @param {NextRequest} request - The incoming request object.
+ * @param {NextRequest} _request - The incoming request object (not used in this handler).
  * @returns {Promise<NextResponse>} A JSON response containing the filtered array of logos.
  */
 
-export async function GET(request: NextRequest): Promise<NextResponse> {
+interface CategoryParams {
+    params: Promise<{ slug: string }>;
+}
+
+export async function GET(_request: Request, { params }: CategoryParams): Promise<NextResponse> {
     try {
-        const url = new URL(request.url);
-        const slug = url.pathname.split('/').pop();
+        // const url = new URL(request.url);
+        // const slug = url.pathname.split('/').pop();
+        const { slug } = await params;
 
         if (!slug || typeof slug !== 'string') {
             return NextResponse.json({ error: 'Category slug is required' }, { status: 400 });
