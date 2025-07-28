@@ -1,9 +1,11 @@
 import { type JSX, Suspense } from 'react';
 
+import type { Metadata } from 'next';
+
 import { LogoGrid } from '@/components/LogoGrid';
 import { SuspenseFallback } from '@/components/common/SuspenseFallback';
-import { getAllLogos, getCategoriesSlug } from '@/data';
-import type { ILogo } from '@/types';
+import { getAllLogos, getCategories, getCategoriesSlug } from '@/data';
+import type { ICategory, ILogo } from '@/types';
 
 interface CategoryPageProps {
     params: Promise<{ slug: string }>;
@@ -22,6 +24,18 @@ const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
 
     return filteredLogos;
 };
+
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const categoryDetails = await getCategories();
+
+    const category = categoryDetails.find((cat) => cat.slug === slug) as ICategory | undefined;
+
+    return {
+        title: `NBL Logos - ${category ? category.name : 'All Categories'}`,
+        description: `Explore over ${category?.count} logos in the ${category?.name} category.`
+    };
+}
 
 export default async function CategoryPage({ params }: CategoryPageProps): Promise<JSX.Element> {
     const { slug } = await params;
