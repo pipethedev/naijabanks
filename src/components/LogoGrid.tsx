@@ -114,9 +114,9 @@ export function LogoGrid({ logos }: LogoGridProps) {
                         initial='hidden'
                         animate='visible'
                         exit='hidden'
-                        className='scrollbar-hide lg:grid-cols-4xl:grid-cols-5 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3'>
-                        {logosToRender.map((logo, index) => (
-                            <LogoCard key={logo.title + index} logo={logo} />
+                        className='scrollbar-hide grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+                        {logosToRender.map((logo) => (
+                            <LogoCard key={logo.order} logo={logo} />
                         ))}
                     </motion.div>
                 ) : (

@@ -26,12 +26,10 @@ export function LogoCodeModal() {
     const [jsxSyntax, setJsxSyntax] = useState<JsxSyntax>('tsx');
     const { toast } = useToast();
 
-    // Memoize the current code cache key
     const currentCodeKey = useMemo(() => {
         return selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat;
     }, [selectedFormat, jsxSyntax]);
 
-    // Memoize the current code and language
     const { currentCode, currentLanguage } = useMemo(() => {
         const code = generatedCode[currentCodeKey] || '';
         const language = selectedFormat === 'svg' ? 'xml' : selectedFormat;
@@ -39,7 +37,6 @@ export function LogoCodeModal() {
         return { currentCode: code, currentLanguage: language };
     }, [generatedCode, currentCodeKey, selectedFormat]);
 
-    // Generate non-JSX formats immediately when logo changes
     const generateNonJsxFormats = useCallback(
         async (targetLogo: typeof logo) => {
             if (!targetLogo) return;
@@ -75,7 +72,6 @@ export function LogoCodeModal() {
         [generatedCode.svg, toast]
     );
 
-    // Generate JSX format when needed
     const generateJsxFormat = useCallback(
         async (targetLogo: typeof logo, syntax: JsxSyntax) => {
             if (!targetLogo || !generatedCode.svg) return;
@@ -85,7 +81,7 @@ export function LogoCodeModal() {
 
             setIsLoading(true);
             try {
-                const svgText = generatedCode.svg; // Reuse already fetched SVG
+                const svgText = generatedCode.svg;
 
                 const jsxResponse = await fetch('/api/svgr', {
                     method: 'POST',
@@ -110,10 +106,9 @@ export function LogoCodeModal() {
                 setIsLoading(false);
             }
         },
-        [generatedCode.svg, toast]
+        [generatedCode, toast]
     );
 
-    // Generate non-JSX formats immediately when component renders with logo
     if (logo && !generatedCode.svg && !isLoading) {
         generateNonJsxFormats(logo);
     }
@@ -128,7 +123,6 @@ export function LogoCodeModal() {
 
     const handleFormatChange = (format: TLogoCodeFormat) => {
         setSelectedFormat(format);
-        // If switching to JSX and we don't have the current syntax cached, trigger generation
         if (format === 'jsx' && !generatedCode[`jsx_${jsxSyntax}`]) {
             setIsLoading(true);
         }
@@ -136,18 +130,16 @@ export function LogoCodeModal() {
 
     const handleJsxSyntaxChange = (syntax: JsxSyntax) => {
         setJsxSyntax(syntax);
-        // If we don't have this syntax cached, trigger generation
         if (selectedFormat === 'jsx' && !generatedCode[`jsx_${syntax}`]) {
             setIsLoading(true);
         }
     };
 
-    // Effect only for JSX format when JSX syntax changes
     useEffect(() => {
         if (logo && selectedFormat === 'jsx') {
             generateJsxFormat(logo, jsxSyntax);
         }
-    }, [logo, selectedFormat, jsxSyntax]);
+    }, [logo, selectedFormat, jsxSyntax, generateJsxFormat]);
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
