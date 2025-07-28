@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-import { API_URL, ROOT_DOMAIN, UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from './config';
+import { API_URL, ROOT_DOMAIN, UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from './config/env';
 
 if (!UPSTASH_REDIS_REST_URL || !UPSTASH_REDIS_REST_TOKEN) {
     throw new Error('Upstash Redis credentials are missing. Check your environment variables.');

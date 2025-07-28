@@ -1,4 +1,4 @@
-import { ROOT_URL } from '@/config';
+import { ROOT_URL } from '@/config/env';
 
 export const prependFullUrlToLogo = (logoPath: string): string => {
     if (typeof logoPath !== 'string' || !logoPath) {
