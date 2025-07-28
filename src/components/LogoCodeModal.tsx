@@ -94,7 +94,7 @@ export const LogoCodeModal: React.FC = () => {
                             <Select
                                 value={selectedFormat}
                                 onValueChange={(v) => setSelectedFormat(v as TLogoCodeFormat)}>
-                                <SelectTrigger className='w-[180px]'>
+                                <SelectTrigger className='w-[140px] md:w-[180px]'>
                                     <SelectValue placeholder='Select format' />
                                 </SelectTrigger>
                                 <SelectContent>
