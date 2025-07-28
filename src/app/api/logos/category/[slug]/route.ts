@@ -1,25 +1,27 @@
 import { NextResponse } from 'next/server';
 
-import { logosData } from '@/data';
+import { logosWithFullUrls } from '@/data';
 import type { ILogo } from '@/types';
+import { slugify } from '@/utils';
 
 /**
  * @handler GET
  * @description API endpoint to retrieve logos filtered by a specific category.
+ * @param {Request} request - The incoming request object (unused).
  * @param {{ params: { slug: string } }} context - The context object containing dynamic route parameters.
  * @returns {Promise<NextResponse>} A JSON response containing the filtered array of logos.
  */
 
-export async function GET({ params }: { params: { slug: string } }): Promise<NextResponse> {
+export async function GET(request: Request, { params }: { params: { slug: string } }): Promise<NextResponse> {
     try {
         const { slug } = await params;
 
-        if (!slug) {
+        if (!slug || typeof slug !== 'string') {
             return NextResponse.json({ error: 'Category slug is required' }, { status: 400 });
         }
 
-        const filteredLogos: ILogo[] = logosData.filter((logo: ILogo) =>
-            logo.categories.some((category) => category.toLowerCase().replace(/\s+/g, '-') === slug)
+        const filteredLogos: ILogo[] = logosWithFullUrls.filter((logo: ILogo) =>
+            logo.categories.some((category) => slugify(category) === slug)
         );
 
         if (filteredLogos.length === 0) {
