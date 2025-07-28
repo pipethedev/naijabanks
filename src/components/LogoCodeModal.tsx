@@ -46,7 +46,6 @@ export function LogoCodeModal() {
             // Check if we already have the basic formats
             if (generatedCode.svg) return;
 
-            setIsLoading(true);
             try {
                 const svgText = await getSvgSource({ url: targetLogo.route });
 
@@ -67,8 +66,6 @@ export function LogoCodeModal() {
             } catch (error) {
                 console.error('Failed to fetch or generate code:', error);
                 toast({ title: 'Error loading content', variant: 'destructive' });
-            } finally {
-                setIsLoading(false);
             }
         },
         [generatedCode.svg, toast]
@@ -81,7 +78,6 @@ export function LogoCodeModal() {
             const codeCacheKey = `jsx_${syntax}`;
             if (generatedCode[codeCacheKey]) return;
 
-            setIsLoading(true);
             try {
                 const svgText = generatedCode.svg;
 
@@ -104,14 +100,12 @@ export function LogoCodeModal() {
                     ...prev,
                     [codeCacheKey]: 'Error generating JSX code.'
                 }));
-            } finally {
-                setIsLoading(false);
             }
         },
         [generatedCode, toast]
     );
 
-    if (logo && !generatedCode.svg && !isLoading) {
+    if (logo && !generatedCode.svg) {
         generateNonJsxFormats(logo);
     }
 
@@ -132,7 +126,6 @@ export function LogoCodeModal() {
                 if (generatedCode[codeCacheKey]) return;
 
                 if (!generatedCode.svg) {
-                    setIsLoading(true);
                     try {
                         const svgText = await getSvgSource({ url: targetLogo.route });
                         setGeneratedCode((prev) => ({ ...prev, svg: svgText }));
@@ -141,8 +134,6 @@ export function LogoCodeModal() {
                         toast({ title: 'Error loading SVG', variant: 'destructive' });
 
                         return;
-                    } finally {
-                        setIsLoading(false);
                     }
                 }
 
@@ -169,7 +160,6 @@ export function LogoCodeModal() {
 
             if (generatedCode[format]) return;
 
-            setIsLoading(true);
             try {
                 const svgText = await getSvgSource({ url: targetLogo.route });
 
@@ -201,39 +191,24 @@ export function LogoCodeModal() {
             } catch (error) {
                 console.error('Failed to generate code:', error);
                 toast({ title: 'Error generating code', variant: 'destructive' });
-            } finally {
-                setIsLoading(false);
             }
         },
         [generatedCode, toast]
     );
 
-    // Handle code generation when format changes or logo is selected
+    const handleFormatChange = (format: TLogoCodeFormat) => {
+        setSelectedFormat(format);
+    };
+
+    const handleJsxSyntaxChange = (syntax: JsxSyntax) => {
+        setJsxSyntax(syntax);
+    };
+
     useEffect(() => {
         if (logo && !generatedCode[currentCodeKey]) {
             generateCodeForFormat(logo, selectedFormat, jsxSyntax);
         }
     }, [logo, currentCodeKey, selectedFormat, jsxSyntax, generateCodeForFormat]);
-
-    const handleFormatChange = (format: TLogoCodeFormat) => {
-        setSelectedFormat(format);
-        if (format === 'jsx' && !generatedCode[`jsx_${jsxSyntax}`]) {
-            setIsLoading(true);
-        }
-    };
-
-    const handleJsxSyntaxChange = (syntax: JsxSyntax) => {
-        setJsxSyntax(syntax);
-        if (selectedFormat === 'jsx' && !generatedCode[`jsx_${syntax}`]) {
-            setIsLoading(true);
-        }
-    };
-
-    useEffect(() => {
-        if (logo && selectedFormat === 'jsx') {
-            generateJsxFormat(logo, jsxSyntax);
-        }
-    }, [logo, selectedFormat, jsxSyntax, generateJsxFormat]);
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
