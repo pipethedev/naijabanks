@@ -19,7 +19,7 @@ export async function GET(_request: Request, { params }: { params: { slug: strin
             return NextResponse.json({ error: 'Category slug is required' }, { status: 400 });
         }
 
-        const filteredLogos: ILogo[] = logos.filter((logo: ILogo) =>
+        const filteredLogos = logos.filter((logo) =>
             logo.categories.some((category) => category.toLowerCase().replace(/\s+/g, '-') === slug)
         );
 

@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 
-import { convertToPascalCase } from '@/utils';
 import { transform } from '@svgr/core';
 
 export async function POST(request: Request): Promise<NextResponse> {
