@@ -64,9 +64,9 @@ export const getReactCode = ({
 
     const propsType = typescript
         ? native
-            ? `import type { SvgProps } from 'react-native-svg';\n\nconst ${componentName}Icon = (props: SvgProps) => {`
-            : `import type { SVGProps } from 'react';\n\nconst ${componentName}Icon = (props: SVGProps<SVGSVGElement>) => {`
-        : `const ${componentName}Icon = (props) => {`;
+            ? `import type { SvgProps } from 'react-native-svg';\n\nconst ${componentName} = (props: SvgProps) => {`
+            : `import type { SVGProps } from 'react';\n\nconst ${componentName} = (props: SVGProps<SVGSVGElement>) => {`
+        : `const ${componentName} = (props) => {`;
 
     return `
 ${native ? '' : imports}
@@ -79,6 +79,6 @@ ${propsType}
   );
 };
 
-export default ${componentName}Icon;
+export default ${componentName};
 `.trim();
 };
