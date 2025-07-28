@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-import { API_URL, UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from './config';
+import { API_URL, ROOT_DOMAIN, UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from './config';
 
 if (!UPSTASH_REDIS_REST_URL || !UPSTASH_REDIS_REST_TOKEN) {
     throw new Error('Upstash Redis credentials are missing. Check your environment variables.');
@@ -29,20 +29,43 @@ export const config = {
          * - _next/image (image optimization files)
          * - favicon.ico (favicon file)
          */
-        '/((?!_next/static|_next/image|images|logos|favicon.ico).*)'
+        '/((?!_next/static|_next/image|images|favicon.ico).*)'
     ]
 };
 
 export default async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
-    const hostname = request.headers.get('host') ?? 'localhost';
-    const apiDomain = API_URL;
+    const hostname = request.headers.get('host');
+    if (!hostname) {
+        throw new Error('Host header is missing from the request.');
+    }
 
-    if (hostname === apiDomain) {
+    const rootDomain = ROOT_DOMAIN || 'nbl.local';
+    const apiDomain = API_URL || 'api.nbl.local';
+
+    // console.log('Middleware request:', {
+    //     hostname,
+    //     pathname,
+    //     rootDomain,
+    //     apiDomain
+    // });
+
+    // console.log('Request URL:', {
+    //     url: request.url,
+    //     method: request.method,
+    //     nextUrl: request.nextUrl.toString()
+    // });
+
+    if (hostname.startsWith('api.')) {
+        // const url = request.nextUrl.clone();
+        // url.hostname = rootDomain;
+        // url.pathname = `/api${pathname}`;
+
+        // return NextResponse.rewrite(url);
         return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
     }
 
-    if (pathname.startsWith('/api')) {
+    if (pathname.startsWith('/api') && ratelimit) {
         const identifier =
             request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
             request.headers.get('x-real-ip') ??
