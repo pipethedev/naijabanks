@@ -56,8 +56,8 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 # Healthcheck to ensure the server is running correctly
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:3000/ || exit 1
+# HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+#   CMD wget --quiet --tries=1 --spider http://localhost:3000/ || exit 1
 
 # Start the server
 CMD ["node", "server.js"]
