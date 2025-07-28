@@ -1,6 +1,6 @@
 import type { TRawLogo } from '@/types';
 
-export const library: TRawLogo[] = [
+export const logos: TRawLogo[] = [
     {
         title: 'Access Holdings PLC',
         categories: ['Commercial Bank', 'NGX'],
