@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useToast } from '@/hooks/useToast';
 import { useModalStore } from '@/store/modalStore';
 import type { ILogo, TCategory } from '@/types';
+import { slugify } from '@/utils';
 import { copyToClipboard } from '@/utils/clipboard';
 
 import { motion } from 'framer-motion';
@@ -89,7 +90,7 @@ export function LogoCard({ logo }: LogoCardProps) {
                         {logo.categories.slice(0, 2).map((category: TCategory, index: number) => (
                             <div key={`${category}-0`} className='flex items-center'>
                                 <Link
-                                    href={`/category/${category.toLowerCase()}`}
+                                    href={`/category/${slugify(category)}`}
                                     title={`View more ${category} logos`}
                                     className='text-muted-foreground inline-block text-xs hover:underline'>
                                     {category}
