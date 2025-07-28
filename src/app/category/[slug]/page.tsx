@@ -27,7 +27,7 @@ const getLogosByCategory = async (slug: string): Promise<ILogo[]> => {
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
     const { slug } = await params;
-    const categoryDetails = await getCategories();
+    const categoryDetails = getCategories();
 
     const category = categoryDetails.find((cat) => cat.slug === slug) as ICategory | undefined;
 
