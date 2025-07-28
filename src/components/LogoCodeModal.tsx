@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
@@ -21,75 +21,102 @@ type JsxSyntax = 'tsx' | 'jsx';
 export function LogoCodeModal() {
     const { logo, closeModal } = useModalStore();
     const [generatedCode, setGeneratedCode] = useState<Record<string, string>>({});
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [selectedFormat, setSelectedFormat] = useState<TLogoCodeFormat>('svg');
     const [jsxSyntax, setJsxSyntax] = useState<JsxSyntax>('tsx');
     const { toast } = useToast();
 
-    const fetchAndGenerateCode = useCallback(
-        async (targetLogo: typeof logo, syntax: JsxSyntax) => {
+    // Memoize the current code cache key
+    const currentCodeKey = useMemo(() => {
+        return selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat;
+    }, [selectedFormat, jsxSyntax]);
+
+    // Memoize the current code and language
+    const { currentCode, currentLanguage } = useMemo(() => {
+        const code = generatedCode[currentCodeKey] || '';
+        const language = selectedFormat === 'svg' ? 'xml' : selectedFormat;
+
+        return { currentCode: code, currentLanguage: language };
+    }, [generatedCode, currentCodeKey, selectedFormat]);
+
+    // Generate non-JSX formats immediately when logo changes
+    const generateNonJsxFormats = useCallback(
+        async (targetLogo: typeof logo) => {
             if (!targetLogo) return;
 
-            const codeCacheKey = selectedFormat === 'jsx' ? `jsx_${syntax}` : selectedFormat;
-            if (generatedCode[codeCacheKey]) {
-                setIsLoading(false);
-
-                return;
-            }
+            // Check if we already have the basic formats
+            if (generatedCode.svg) return;
 
             setIsLoading(true);
             try {
                 const svgText = await getSvgSource({ url: targetLogo.route });
 
-                let newSnippets: Record<string, string> = {};
-
-                if (selectedFormat === 'jsx') {
-                    const jsxResponse = await fetch('/api/svgr', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            svg: svgText,
-                            componentName: convertToPascalCase(targetLogo.title),
-                            typescript: syntax === 'tsx'
-                        })
-                    });
-                    const { jsx } = await jsxResponse.json();
-                    newSnippets[codeCacheKey] = jsx;
-                } else {
-                    newSnippets = {
-                        svg: svgText,
-                        vue: getVueCode({
-                            lang: syntax,
-                            content: svgText
-                        }),
-                        astro: getAstroCode(svgText),
-                        'web-component': getWebComponentCode({
-                            title: targetLogo.title,
-                            svg: svgText
-                        })
-                    };
-                }
+                const newSnippets = {
+                    svg: svgText,
+                    vue: getVueCode({
+                        lang: 'tsx',
+                        content: svgText
+                    }),
+                    astro: getAstroCode(svgText),
+                    'web-component': getWebComponentCode({
+                        title: targetLogo.title,
+                        svg: svgText
+                    })
+                };
 
                 setGeneratedCode((prev) => ({ ...prev, ...newSnippets }));
             } catch (error) {
                 console.error('Failed to fetch or generate code:', error);
                 toast({ title: 'Error loading content', variant: 'destructive' });
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [generatedCode.svg, toast]
+    );
+
+    // Generate JSX format when needed
+    const generateJsxFormat = useCallback(
+        async (targetLogo: typeof logo, syntax: JsxSyntax) => {
+            if (!targetLogo || !generatedCode.svg) return;
+
+            const codeCacheKey = `jsx_${syntax}`;
+            if (generatedCode[codeCacheKey]) return;
+
+            setIsLoading(true);
+            try {
+                const svgText = generatedCode.svg; // Reuse already fetched SVG
+
+                const jsxResponse = await fetch('/api/svgr', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        svg: svgText,
+                        componentName: convertToPascalCase(targetLogo.title),
+                        typescript: syntax === 'tsx'
+                    })
+                });
+
+                const { generatedJsx } = await jsxResponse.json();
+                setGeneratedCode((prev) => ({ ...prev, [codeCacheKey]: generatedJsx }));
+            } catch (error) {
+                console.error('Failed to generate JSX code:', error);
+                toast({ title: 'Error generating JSX code', variant: 'destructive' });
                 setGeneratedCode((prev) => ({
                     ...prev,
-                    [codeCacheKey]: 'Error loading content.'
+                    [codeCacheKey]: 'Error generating JSX code.'
                 }));
             } finally {
                 setIsLoading(false);
             }
         },
-        [generatedCode, selectedFormat, toast]
+        [generatedCode.svg, toast]
     );
 
-    useEffect(() => {
-        if (logo) {
-            fetchAndGenerateCode(logo, jsxSyntax);
-        }
-    }, [logo, jsxSyntax, fetchAndGenerateCode]);
+    // Generate non-JSX formats immediately when component renders with logo
+    if (logo && !generatedCode.svg && !isLoading) {
+        generateNonJsxFormats(logo);
+    }
 
     const handleOpenChange = (open: boolean) => {
         if (!open) {
@@ -99,9 +126,28 @@ export function LogoCodeModal() {
         }
     };
 
-    const currentCode = generatedCode[selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat] || '';
+    const handleFormatChange = (format: TLogoCodeFormat) => {
+        setSelectedFormat(format);
+        // If switching to JSX and we don't have the current syntax cached, trigger generation
+        if (format === 'jsx' && !generatedCode[`jsx_${jsxSyntax}`]) {
+            setIsLoading(true);
+        }
+    };
 
-    const currentLanguage = selectedFormat === 'svg' ? 'xml' : selectedFormat;
+    const handleJsxSyntaxChange = (syntax: JsxSyntax) => {
+        setJsxSyntax(syntax);
+        // If we don't have this syntax cached, trigger generation
+        if (selectedFormat === 'jsx' && !generatedCode[`jsx_${syntax}`]) {
+            setIsLoading(true);
+        }
+    };
+
+    // Effect only for JSX format when JSX syntax changes
+    useEffect(() => {
+        if (logo && selectedFormat === 'jsx') {
+            generateJsxFormat(logo, jsxSyntax);
+        }
+    }, [logo, selectedFormat, jsxSyntax]);
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
@@ -120,9 +166,7 @@ export function LogoCodeModal() {
                         </SheetHeader>
 
                         <div className='border-border flex items-center justify-between border-y px-6 py-4'>
-                            <Select
-                                value={selectedFormat}
-                                onValueChange={(v) => setSelectedFormat(v as TLogoCodeFormat)}>
+                            <Select value={selectedFormat} onValueChange={handleFormatChange}>
                                 <SelectTrigger className='w-[180px]'>
                                     <SelectValue placeholder='Select format' />
                                 </SelectTrigger>
@@ -139,7 +183,7 @@ export function LogoCodeModal() {
                                 <div className='border-border flex items-center rounded-md border p-0.5 text-xs'>
                                     <button
                                         type='button'
-                                        onClick={() => setJsxSyntax('tsx')}
+                                        onClick={() => handleJsxSyntaxChange('tsx')}
                                         className={`rounded-sm px-2 py-0.5 ${
                                             jsxSyntax === 'tsx' ? 'bg-secondary' : ''
                                         }`}>
@@ -147,7 +191,7 @@ export function LogoCodeModal() {
                                     </button>
                                     <button
                                         type='button'
-                                        onClick={() => setJsxSyntax('jsx')}
+                                        onClick={() => handleJsxSyntaxChange('jsx')}
                                         className={`rounded-sm px-2 py-0.5 ${
                                             jsxSyntax === 'jsx' ? 'bg-secondary' : ''
                                         }`}>

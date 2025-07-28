@@ -17,8 +17,7 @@ export async function POST(request: Request): Promise<NextResponse> {
                 typescript: typescript,
                 icon: true,
                 titleProp: true,
-                jsxRuntime: 'automatic',
-                plugins: ['@svgr/plugin-jsx', '@svgr/plugin-svgo', '@svgr/plugin-prettier']
+                jsxRuntime: 'automatic'
             },
             { componentName }
         );
