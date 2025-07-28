@@ -12,4 +12,4 @@ export interface ILogo {
 
 export type TRawLogo = Omit<ILogo, 'id' | 'order'>;
 
-export type TLogoCodeFormat = 'svg' | 'jsx' | 'vue' | 'astro' | 'web-component';
+export type TLogoCodeFormat = 'svg' | 'jsx' | "react-native" | 'vue' | 'astro' | 'web-component';

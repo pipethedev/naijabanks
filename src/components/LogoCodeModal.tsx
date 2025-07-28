@@ -7,6 +7,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTi
 import { Spinner } from '@/components/ui/spinner';
 import { useToast } from '@/hooks/useToast';
 import { getAstroCode, getSvgSource, getVueCode, getWebComponentCode } from '@/lib/templates';
+import { getSvgReactCode } from '@/lib/templates/getReactCode';
 import { useModalStore } from '@/store/modalStore';
 import type { TLogoCodeFormat } from '@/types';
 import { convertToPascalCase } from '@/utils';
@@ -24,99 +25,19 @@ export function LogoCodeModal() {
     const [isLoading, setIsLoading] = useState(false);
     const [selectedFormat, setSelectedFormat] = useState<TLogoCodeFormat>('svg');
     const [jsxSyntax, setJsxSyntax] = useState<JsxSyntax>('tsx');
+
     const { toast } = useToast();
 
-    // Memoize the current code cache key
     const currentCodeKey = useMemo(() => {
         return selectedFormat === 'jsx' ? `jsx_${jsxSyntax}` : selectedFormat;
     }, [selectedFormat, jsxSyntax]);
 
-    // Memoize the current code and language
     const { currentCode, currentLanguage } = useMemo(() => {
         const code = generatedCode[currentCodeKey] || '';
         const language = selectedFormat === 'svg' ? 'xml' : selectedFormat;
 
         return { currentCode: code, currentLanguage: language };
     }, [generatedCode, currentCodeKey, selectedFormat]);
-
-    // Generate non-JSX formats immediately when logo changes
-    const generateNonJsxFormats = useCallback(
-        async (targetLogo: typeof logo) => {
-            if (!targetLogo) return;
-
-            // Check if we already have the basic formats
-            if (generatedCode.svg) return;
-
-            setIsLoading(true);
-            try {
-                const svgText = await getSvgSource({ url: targetLogo.route });
-
-                const newSnippets = {
-                    svg: svgText,
-                    vue: getVueCode({
-                        lang: 'tsx',
-                        content: svgText
-                    }),
-                    astro: getAstroCode(svgText),
-                    'web-component': getWebComponentCode({
-                        title: targetLogo.title,
-                        svg: svgText
-                    })
-                };
-
-                setGeneratedCode((prev) => ({ ...prev, ...newSnippets }));
-            } catch (error) {
-                console.error('Failed to fetch or generate code:', error);
-                toast({ title: 'Error loading content', variant: 'destructive' });
-            } finally {
-                setIsLoading(false);
-            }
-        },
-        [generatedCode.svg, toast]
-    );
-
-    // Generate JSX format when needed
-    const generateJsxFormat = useCallback(
-        async (targetLogo: typeof logo, syntax: JsxSyntax) => {
-            if (!targetLogo || !generatedCode.svg) return;
-
-            const codeCacheKey = `jsx_${syntax}`;
-            if (generatedCode[codeCacheKey]) return;
-
-            setIsLoading(true);
-            try {
-                const svgText = generatedCode.svg; // Reuse already fetched SVG
-
-                const jsxResponse = await fetch('/api/svgr', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        svg: svgText,
-                        componentName: convertToPascalCase(targetLogo.title),
-                        typescript: syntax === 'tsx'
-                    })
-                });
-
-                const { generatedJsx } = await jsxResponse.json();
-                setGeneratedCode((prev) => ({ ...prev, [codeCacheKey]: generatedJsx }));
-            } catch (error) {
-                console.error('Failed to generate JSX code:', error);
-                toast({ title: 'Error generating JSX code', variant: 'destructive' });
-                setGeneratedCode((prev) => ({
-                    ...prev,
-                    [codeCacheKey]: 'Error generating JSX code.'
-                }));
-            } finally {
-                setIsLoading(false);
-            }
-        },
-        [generatedCode.svg, toast]
-    );
-
-    // Generate non-JSX formats immediately when component renders with logo
-    if (logo && !generatedCode.svg && !isLoading) {
-        generateNonJsxFormats(logo);
-    }
 
     const handleOpenChange = (open: boolean) => {
         if (!open) {
@@ -126,28 +47,110 @@ export function LogoCodeModal() {
         }
     };
 
+    const generateCodeForFormat = useCallback(
+        async (targetLogo: typeof logo, format: TLogoCodeFormat, syntax?: JsxSyntax) => {
+            if (!targetLogo) return;
+
+            if (format === 'jsx' && syntax) {
+                const codeCacheKey = `jsx_${syntax}`;
+                if (generatedCode[codeCacheKey]) return;
+
+                if (!generatedCode.svg) {
+                    setIsLoading(true);
+                    try {
+                        const svgText = await getSvgSource({ url: targetLogo.route });
+                        setGeneratedCode((prev) => ({ ...prev, svg: svgText }));
+                    } catch (error) {
+                        console.error('Failed to fetch SVG:', error);
+                        toast({ title: 'Error loading SVG', variant: 'destructive' });
+
+                        return;
+                    } finally {
+                        setIsLoading(false);
+                    }
+                }
+
+                try {
+                    const svgText = generatedCode.svg;
+                    const generatedJsx = getSvgReactCode({
+                        svg: svgText,
+                        componentName: convertToPascalCase(targetLogo.title),
+                        typescript: syntax === 'tsx',
+                        reactNative: false,
+                        optimize: true
+                    });
+                    setGeneratedCode((prev) => ({ ...prev, [codeCacheKey]: generatedJsx }));
+                } catch (error) {
+                    console.error('Failed to generate JSX code:', error);
+                    toast({ title: 'Error generating JSX code', variant: 'destructive' });
+                    setGeneratedCode((prev) => ({
+                        ...prev,
+                        [codeCacheKey]: 'Error generating JSX code.'
+                    }));
+                }
+
+                return;
+            }
+
+            if (generatedCode[format]) return;
+
+            setIsLoading(true);
+            try {
+                const svgText = await getSvgSource({ url: targetLogo.route });
+
+                let newSnippet: string;
+                switch (format) {
+                    case 'svg':
+                        newSnippet = svgText;
+                        break;
+                    case 'vue':
+                        newSnippet = getVueCode({
+                            lang: 'tsx',
+                            content: svgText
+                        });
+                        break;
+                    case 'astro':
+                        newSnippet = getAstroCode(svgText);
+                        break;
+                    case 'web-component':
+                        newSnippet = getWebComponentCode({
+                            title: targetLogo.title,
+                            svg: svgText
+                        });
+                        break;
+                    default:
+                        return;
+                }
+
+                setGeneratedCode((prev) => ({ ...prev, [format]: newSnippet }));
+            } catch (error) {
+                console.error('Failed to generate code:', error);
+                toast({ title: 'Error generating code', variant: 'destructive' });
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [generatedCode, toast]
+    );
+
+    // Handle code generation when format changes or logo is selected
+    useEffect(() => {
+        if (logo && !generatedCode[currentCodeKey]) {
+            generateCodeForFormat(logo, selectedFormat, jsxSyntax);
+        }
+    }, [logo, currentCodeKey, selectedFormat, jsxSyntax, generateCodeForFormat]);
+
     const handleFormatChange = (format: TLogoCodeFormat) => {
         setSelectedFormat(format);
-        // If switching to JSX and we don't have the current syntax cached, trigger generation
-        if (format === 'jsx' && !generatedCode[`jsx_${jsxSyntax}`]) {
-            setIsLoading(true);
-        }
     };
 
     const handleJsxSyntaxChange = (syntax: JsxSyntax) => {
         setJsxSyntax(syntax);
-        // If we don't have this syntax cached, trigger generation
-        if (selectedFormat === 'jsx' && !generatedCode[`jsx_${syntax}`]) {
-            setIsLoading(true);
+
+        if (selectedFormat === 'jsx' && logo) {
+            generateCodeForFormat(logo, 'jsx', syntax);
         }
     };
-
-    // Effect only for JSX format when JSX syntax changes
-    useEffect(() => {
-        if (logo && selectedFormat === 'jsx') {
-            generateJsxFormat(logo, jsxSyntax);
-        }
-    }, [logo, selectedFormat, jsxSyntax]);
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
