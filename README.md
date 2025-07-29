@@ -5,7 +5,7 @@
 
 A curated collection of high-quality SVG logos for Nigerian banks, fintech companies, and businesses listed on the Nigerian Exchange (NGX). This project provides a centralized resource for designers and developers to easily access and use these logos in their projects.
 
-![Nigerian Bank Logos Screenshot](https://placehold.co/1200x600/000000/FFFFFF?text=Nigerian+Bank+Logos+Screenshot)
+![Nigerian Bank Logos Banner](https://nigerianbanklogos.xyz/images/og-image-lg.jpg)
 
 <div align="center">
     <a href="https://nigerianbanklogos.xyz" target="_blank">
