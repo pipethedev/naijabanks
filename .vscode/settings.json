@@ -31,4 +31,7 @@
     ],
     "eslint.format.enable": true,
     "npm.packageManager": "npm",
+    "svgreact.typescript": true,
+    "svgreact.titleProp": true,
+    "svgreact.expandProps": true
 }

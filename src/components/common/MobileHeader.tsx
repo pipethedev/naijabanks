@@ -8,7 +8,8 @@ import { usePathname } from 'next/navigation';
 import ThemeSwitcher from '@/components/common/ThemeSwitcher';
 import { cn } from '@/utils';
 
-import { ArrowUpRight, Cloud, Github } from 'lucide-react';
+import ImgNbl from '../svg/ImgNbl';
+import { Cloud, Github } from 'lucide-react';
 
 export function MobileHeader() {
     const pathname = usePathname();
@@ -21,7 +22,8 @@ export function MobileHeader() {
                     href='/'
                     className='flex items-center space-x-2 opacity-100 transition-opacity hover:opacity-80'
                     aria-label='Go to the NBL homepage'>
-                    <div className='bg-primary inline-block h-[40px] w-[40px]'></div>
+                    {/* <div className='bg-primary inline-block h-[40px] w-[40px]'></div> */}
+                    <ImgNbl className='h-[40px] w-[40px]' />
                 </Link>
             </div>
 

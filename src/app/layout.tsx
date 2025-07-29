@@ -17,21 +17,21 @@ export const metadata: Metadata = {
     title: 'Nigerian Bank Logos',
     description: 'A curated collection of logos for Nigerian banks, fintechs, and NGX-listed companies.',
     icons: {
-        icon: '/favicon.ico',
-        shortcut: '/favicon-16x16.png',
-        apple: '/apple-touch-icon.png'
+        icon: '/images/favicon.ico',
+        shortcut: '/images/favicon-16x16.png',
+        apple: '/images/apple-touch-icon.png'
     },
     twitter: {
         title: 'Nigerian Bank Logos',
         description: `A curated collection of logos for Nigerian banks, fintechs, and NGX-listed companies.`,
         images: [
             {
-                url: '/og-image-md.jpg',
+                url: '/images/og-image-md.jpg',
                 width: 800,
                 height: 600
             },
             {
-                url: '/og-image-lg.jpg',
+                url: '/images/og-image-md.jpg',
                 width: 1800,
                 height: 1600
             }
@@ -44,12 +44,12 @@ export const metadata: Metadata = {
         siteName: 'Nigerian Bank Logos',
         images: [
             {
-                url: '/og-image-md.jpg',
+                url: '/images/og-image-md.jpg',
                 width: 800,
                 height: 600
             },
             {
-                url: '/og-image-lg.jpg',
+                url: '/images/og-image-lg.jpg',
                 width: 1800,
                 height: 1600
             }

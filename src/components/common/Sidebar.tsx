@@ -7,6 +7,7 @@ import { getAllLogos, getCategories } from '@/data';
 import type { ILogo } from '@/types';
 
 import { GetFigmaPlugin } from '../GetFigmaPlugin';
+import ImgNbl from '../svg/ImgNbl';
 import { HeartHandshake } from 'lucide-react';
 
 export function Sidebar() {
@@ -27,7 +28,8 @@ export function Sidebar() {
                     href='/'
                     className='flex items-center space-x-2 opacity-100 transition-opacity hover:opacity-80'
                     aria-label='Go to the NBL homepage'>
-                    <div className='bg-primary inline-block h-[30px] w-[30px]'></div>
+                    {/* <div className='bg-primary inline-block h-[30px] w-[30px]'></div> */}
+                    <ImgNbl className='h-[30px] w-[30px]' />
                     <span className='text-muted-foreground hidden text-xl font-bold tracking-tight md:block'>NBL</span>
                 </Link>
             </div>
