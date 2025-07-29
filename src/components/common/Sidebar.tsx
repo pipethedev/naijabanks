@@ -38,7 +38,7 @@ export function Sidebar() {
                 <GetFigmaPlugin />
                 <p className='text-muted-foreground text-xs'>
                     Made possible by our amazing{' '}
-                    <Link href='/contributors' className='hover:text-foreground underline'>
+                    <Link href='/' className='hover:text-foreground underline'>
                         <span className='font-semibold'>contributors</span>{' '}
                         <HeartHandshake className='inline h-4 w-4' />
                     </Link>
