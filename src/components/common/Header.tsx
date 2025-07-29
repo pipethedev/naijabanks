@@ -57,7 +57,7 @@ export function Header() {
 
     return (
         <header className='border-border bg-background/80 flex h-[var(--header-height)] w-full items-center justify-between gap-x-4 border-b px-[5%] backdrop-blur-sm sm:px-6'>
-            <div className='lg:w-max-content relative flex w-full items-center'>
+            <div className='relative flex w-full items-center lg:w-[fit-content]'>
                 {isDocsPage ? (
                     <Badge variant='secondary'>v1.0.0</Badge>
                 ) : (
