@@ -68,12 +68,15 @@ export default async function middleware(request: NextRequest): Promise<NextResp
             }
         }
 
-        //*rewrite only if not already an API route
-        if (!isApiRoute) {
-            return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
+        //*blocks direct access to /api
+        if (isApiRoute) {
+            return NextResponse.json(
+                { error: 'Direct /api access is not allowed on the API subdomain.' },
+                { status: 403 }
+            );
         }
 
-        return NextResponse.next();
+        return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
     }
 
     if (isApiRoute && !isApiSubdomain) {
