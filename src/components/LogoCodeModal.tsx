@@ -6,15 +6,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Spinner } from '@/components/ui/spinner';
 import { useLogoCodeGeneration } from '@/hooks/useLogoGeneration';
-import { useToast } from '@/hooks/useToast';
 import { useModalStore } from '@/store/modalStore';
 import type { TLogoCodeFormat } from '@/types';
-import { copyToClipboard } from '@/utils/clipboard';
 import { FORMAT_OPTIONS } from '@/utils/constant';
 
 import { CodeBlock } from './common/CodeBlock';
 import { TabSwitch } from './common/CodeBlock/TabSwitch';
-import { Check, Copy, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { isMobile } from 'react-device-detect';
 
 type JsxSyntax = 'tsx' | 'jsx';
@@ -22,12 +20,10 @@ type JsxPlatform = 'web' | 'native';
 
 export const LogoCodeModal: React.FC = () => {
     const { logo, closeModal } = useModalStore();
-    const { toast } = useToast();
 
     const [selectedFormat, setSelectedFormat] = useState<TLogoCodeFormat>('svg');
     const [jsxSyntax, setJsxSyntax] = useState<JsxSyntax>('tsx');
     const [jsxPlatform, setJsxPlatform] = useState<JsxPlatform>('web');
-    const [isCopied, setIsCopied] = useState(false);
 
     const { generatedCode, isLoading } = useLogoCodeGeneration(logo, jsxSyntax, jsxPlatform);
 
@@ -61,18 +57,6 @@ export const LogoCodeModal: React.FC = () => {
             setSelectedFormat('svg');
         }
     };
-
-    const handleCopy = useCallback(async () => {
-        if (!currentCode) return;
-        const success = await copyToClipboard(currentCode);
-        if (success) {
-            setIsCopied(true);
-            toast({ title: 'Copied to clipboard!' });
-            setTimeout(() => setIsCopied(false), 2000);
-        } else {
-            toast({ title: 'Failed to copy', variant: 'destructive' });
-        }
-    }, [currentCode, toast]);
 
     return (
         <Sheet open={!!logo} onOpenChange={handleOpenChange}>
