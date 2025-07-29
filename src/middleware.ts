@@ -42,37 +42,47 @@ export default async function middleware(request: NextRequest) {
 
     const rootDomain = ROOT_DOMAIN || 'nbl.local';
     const apiDomain = API_URL || 'api.nbl.local';
+    const isApiRoute = pathname.startsWith('/api');
+    const isApiSubdomain = hostname.startsWith(`api.${rootDomain}`);
 
-    if (hostname.startsWith(`api.${rootDomain}`)) {
+    if (isApiSubdomain) {
+        if (ratelimit) {
+            const identifier =
+                request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+                request.headers.get('x-real-ip') ??
+                '127.0.0.1';
+
+            const { success, pending, limit, remaining, reset } = await ratelimit.limit(identifier);
+
+            if (!success) {
+                return NextResponse.json(
+                    { error: 'Too many requests. Please try again later.' },
+                    {
+                        status: 429,
+                        headers: {
+                            'X-RateLimit-Limit': limit.toString(),
+                            'X-RateLimit-Remaining': remaining.toString(),
+                            'X-RateLimit-Reset': reset.toString()
+                        }
+                    }
+                );
+            }
+        }
+
         // const url = request.nextUrl.clone();
         // url.hostname = rootDomain;
         // url.pathname = `/api${pathname}`;
 
         // return NextResponse.rewrite(url);
+
         return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
     }
 
-    if (pathname.startsWith('/api') && ratelimit) {
-        const identifier =
-            request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-            request.headers.get('x-real-ip') ??
-            '127.0.0.1';
-
-        const { success, pending, limit, remaining, reset } = await ratelimit.limit(identifier);
-
-        if (!success) {
-            return NextResponse.json(
-                { error: 'Too many requests. Please try again later.' },
-                {
-                    status: 429,
-                    headers: {
-                        'X-RateLimit-Limit': limit.toString(),
-                        'X-RateLimit-Remaining': remaining.toString(),
-                        'X-RateLimit-Reset': reset.toString()
-                    }
-                }
-            );
-        }
+    if (isApiRoute && !isApiSubdomain) {
+        return NextResponse.json(
+            { error: 'Forbidden: Please use the api subdomain for API requests.' },
+            { status: 403 }
+        );
     }
 
     return NextResponse.next();
