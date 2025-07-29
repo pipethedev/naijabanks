@@ -43,20 +43,7 @@ export default async function middleware(request: NextRequest) {
     const rootDomain = ROOT_DOMAIN || 'nbl.local';
     const apiDomain = API_URL || 'api.nbl.local';
 
-    // console.log('Middleware request:', {
-    //     hostname,
-    //     pathname,
-    //     rootDomain,
-    //     apiDomain
-    // });
-
-    // console.log('Request URL:', {
-    //     url: request.url,
-    //     method: request.method,
-    //     nextUrl: request.nextUrl.toString()
-    // });
-
-    if (hostname.startsWith('api.')) {
+    if (hostname.startsWith(`api.${rootDomain}`)) {
         // const url = request.nextUrl.clone();
         // url.hostname = rootDomain;
         // url.pathname = `/api${pathname}`;
