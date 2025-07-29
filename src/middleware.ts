@@ -33,7 +33,7 @@ export const config = {
     ]
 };
 
-export default async function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest): Promise<NextResponse> {
     const { pathname } = request.nextUrl;
     const hostname = request.headers.get('host');
     if (!hostname) {
@@ -41,7 +41,6 @@ export default async function middleware(request: NextRequest) {
     }
 
     const rootDomain = ROOT_DOMAIN || 'nbl.local';
-    const apiDomain = API_URL || 'api.nbl.local';
     const isApiRoute = pathname.startsWith('/api');
     const isApiSubdomain = hostname.startsWith(`api.${rootDomain}`);
 
@@ -52,7 +51,7 @@ export default async function middleware(request: NextRequest) {
                 request.headers.get('x-real-ip') ??
                 '127.0.0.1';
 
-            const { success, pending, limit, remaining, reset } = await ratelimit.limit(identifier);
+            const { success, limit, remaining, reset } = await ratelimit.limit(identifier);
 
             if (!success) {
                 return NextResponse.json(
@@ -69,13 +68,12 @@ export default async function middleware(request: NextRequest) {
             }
         }
 
-        // const url = request.nextUrl.clone();
-        // url.hostname = rootDomain;
-        // url.pathname = `/api${pathname}`;
+        //*rewrite only if not already an API route
+        if (!isApiRoute) {
+            return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
+        }
 
-        // return NextResponse.rewrite(url);
-
-        return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
+        return NextResponse.next();
     }
 
     if (isApiRoute && !isApiSubdomain) {
