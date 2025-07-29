@@ -142,16 +142,6 @@ export const LogoCodeModal: React.FC = () => {
                                         language={currentLanguage}
                                         className='h-[calc(82vh-200px)] overflow-y-auto'
                                     />
-                                    <button
-                                        type='button'
-                                        onClick={handleCopy}
-                                        className='bg-secondary hover:bg-accent absolute top-3 right-3 rounded-md p-2'>
-                                        {isCopied ? (
-                                            <Check className='h-4 w-4 text-green-500' />
-                                        ) : (
-                                            <Copy className='h-4 w-4' />
-                                        )}
-                                    </button>
                                 </div>
                             )}
                         </div>
