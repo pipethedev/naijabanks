@@ -1,7 +1,7 @@
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 export const SITE_PROTOCOL = IS_PRODUCTION ? 'https' : 'http';
 
-export const ROOT_DOMAIN = process.env.NEXT_PUBLIC_ROOT_DOMAIN! || 'localhost:3000';
+export const ROOT_DOMAIN = process.env.NEXT_PUBLIC_ROOT_DOMAIN || 'nigerianbanklogos.xyz';
 export const SITE_NAME = 'Nigerian Bank Logos';
 
 export const ROOT_URL = `${SITE_PROTOCOL}://${ROOT_DOMAIN}`;

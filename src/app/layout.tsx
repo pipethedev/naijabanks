@@ -31,7 +31,7 @@ export const metadata: Metadata = {
                 height: 600
             },
             {
-                url: '/images/og-image-md.jpg',
+                url: '/images/og-image-lg.jpg',
                 width: 1800,
                 height: 1600
             }
