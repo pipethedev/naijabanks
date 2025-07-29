@@ -17,9 +17,10 @@ interface CodeBlockProps {
     code: string;
     language?: string;
     className?: string;
+    wrapLongLines?: boolean;
 }
 
-export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, className }) => {
+export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, className, ...props }) => {
     const { resolvedTheme } = useTheme();
     const { toast } = useToast();
     const [isCopied, setIsCopied] = useState(false);
@@ -47,7 +48,6 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, className 
             <SyntaxHighlighter
                 language={language}
                 style={syntaxTheme}
-                wrapLongLines
                 customStyle={{
                     margin: 0,
                     padding: '1rem',
@@ -60,7 +60,8 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, className 
                     style: {
                         fontFamily: 'var(--font-mono)'
                     }
-                }}>
+                }}
+                {...props}>
                 {code}
             </SyntaxHighlighter>
             <button

@@ -124,6 +124,7 @@ export const LogoCodeModal: React.FC = () => {
                                     <CodeBlock
                                         code={currentCode}
                                         language={currentLanguage}
+                                        wrapLongLines
                                         className='h-[calc(82vh-200px)] overflow-y-auto'
                                     />
                                 </div>
