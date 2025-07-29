@@ -7,14 +7,56 @@ A curated collection of high-quality SVG logos for Nigerian banks, fintech compa
 
 ![Nigerian Bank Logos Screenshot](https://placehold.co/1200x600/000000/FFFFFF?text=Nigerian+Bank+Logos+Screenshot)
 
+<div align="center">
+    <a href="https://nigerianbanklogos.xyz" target="_blank">
+        Explore
+    </a>
+    <span>&nbsp;▪️&nbsp;</span>
+    <a href="https://github.com/pariola-droid/Nigerian-Bank-Logos/issues/new?assignees=&labels=request&projects=&template=request-svg.yml&title=%5B%F0%9F%94%94+Request+SVG%5D%3A+">
+        Request logo
+    </a>
+    <span>&nbsp;▪️&nbsp;</span>
+    <a href="#-getting-started">
+        Submit logo
+    </a>
+    <span>&nbsp;▪️&nbsp;</span>
+    <a href="https://www.figma.com/community/plugin/1463315460139021415/nigerian-bank-logos" target="_blank">
+        Figma Plugin
+    </a>
+    <span>&nbsp;▪️&nbsp;</span>
+    <a href="https://nigerianbanklogos.xyz/api" target="_blank">
+        API
+    </a>
+    <span>&nbsp;▪️&nbsp;</span>
+    <a href="#-contributing">
+        Contributing
+    </a>
+</div>
+
+---
+
+<div align="center">
+
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Pariola-droid/Nigerian-Bank-Logos?style=flat)](https://github.com/Pariola-droid/Nigerian-Bank-Logos/pulls)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Pariola-droid/Nigerian-Bank-Logos?style=social)](https://github.com/Pariola-droid/Nigerian-Bank-Logos)
+[![Next.js](https://img.shields.io/badge/Next.js-000?logo=next.js&logoColor=fff&style=flat)](https://nextjs.org/)
+[![Brimble](https://img.shields.io/badge/Brimble-000?logo=brimble&logoColor=fff&style=flat)](https://brimble.io/)
+[![GitHub issues](https://img.shields.io/github/issues/Pariola-droid/Nigerian-Bank-Logos?style=flat)](https://github.com/Pariola-droid/Nigerian-Bank-Logos/issues)
+[![GitHub forks](https://img.shields.io/github/forks/Pariola-droid/Nigerian-Bank-Logos?style=flat)](https://github.com/Pariola-droid/Nigerian-Bank-Logos/network/members)
+<!-- [![Github actions](https://img.shields.io/github/actions/workflow/status/Pariola-droid/Nigerian-Bank-Logos/ci.yml?style=flat)](https://github.com/Pariola-droid/Nigerian-Bank-Logos/actions) -->
+
+</div>
+
+---
+
 ## ✨ Features
 
 - **High-Quality SVGs:** All logos are in SVG format, ensuring they are scalable and look great on any device.
-- **Easy to Use:** Simply search for the logo you need, and copy it to your clipboard or download it in various formats.
-- **Developer Friendly:** Provides an API to programmatically access the logos.
-- **Figma Plugin:** A Figma plugin is available to easily insert logos directly into your designs.
-- **Categorized:** Logos are organized into categories like "Banks," "Fintech," and "NGX" for easy browsing.
-- **Light & Dark Mode:** The website is designed to be viewed in both light and dark mode.
+- **Easy to Use:** Search, copy, or download logos in various formats.
+- **Developer Friendly:** Public API for programmatic access.
+- **Figma Plugin:** Insert logos directly into your Figma designs.
+- **Categorized:** Organized by "Banks," "Fintech," "NGX," and more.
+- **Light & Dark Mode:** Fully responsive for both themes.
 
 ## 🚀 Tech Stack
 
@@ -22,64 +64,105 @@ A curated collection of high-quality SVG logos for Nigerian banks, fintech compa
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
 - **Search:** [Fuse.js](https://fusejs.io/)
+- **SVG Utilities:** [SVGO](https://github.com/svg/svgo) (for optimization)
 - **Deployment:** [Brimble](https://brimble.io/)
 
-## 🏁 Getting Started
+## 🧩 Extensions & Integrations
 
-To get a local copy up and running, follow these simple steps.
+Nigerian Bank Logos can be used in various environments and tools:
+
+- **Figma Plugin:** [See Figma Plugin](https://www.figma.com/community/plugin/1463315460139021415/nigerian-bank-logos)
+- **API:** [See API Docs](./src/app/docs/page.tsx)
+—feel free to build your own!
+
+## 🏁 Getting Started
 
 ### Prerequisites
 
 - Node.js (v18 or higher)
-- pnpm (or your preferred package manager)
+- pnpm (recommended) or npm/yarn
 
 ### Installation
 
 1. **Clone the repo**
 
     ```sh
-    git clone [https://github.com/Pariola-droid/Nigerian-Bank-Logos](https://github.com/Pariola-droid/Nigerian-Bank-Logos)
-    ```
-
-2. **Navigate to the project directory**
-
-    ```sh
+    git clone https://github.com/Pariola-droid/Nigerian-Bank-Logos
     cd nigerian-bank-logos
     ```
 
-3. **Install dependencies**
+2. **Install dependencies**
 
     ```sh
     pnpm install
     ```
 
-4. **Run the development server**
+3. **Run the development server**
 
     ```sh
     pnpm dev
     ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🖼️ Adding a New Logo
+
+> [!IMPORTANT]
+ Only submit SVGs you have permission to use, or that are under a license compatible with this project. Optimize SVGs with [SVGOMG](https://jakearchibald.github.io/svgomg/) and ensure the `viewBox` is preserved. Max size: **24kb**.
+
+1. **Fork** the repository and create a new branch:
+
+    ```sh
+    git checkout -b feature/add-new-logo
+    ```
+
+2. **Add your SVG** to the `public/library` directory. Use lowercase, kebab-case filenames (e.g., `access-bank.svg`).
+
+3. **Add metadata** for your logo in `src/data/logos.ts`:
+
+    ```ts
+    {
+        title: "Bank Name",
+        categories: ["Bank", "NGX"],
+        route: "/logos/bank-name.svg",
+        url: "https://bankwebsite.com",
+        ticker: "TICKER" // For NGX-listed companies
+    }
+    ```
+
+> [!NOTE]
+>
+> - The list of categories is here: [`src/types/categories.ts`](https://github.com/Pariola-droid/Nigerian-Bank-Logos/blob/main/src/types/entities/category.ts). You can add a new category if you need it.
+> - You can add multiple categories by separating them with commas in the `categories` array, sample: `categories: ["Bank", "Fintech"]`.
+>
+4. **Commit and push** your changes:
+
+    ```sh
+    git commit -m "feat: add Bank Name logo"
+    git push origin feature/add-new-logo
+    ```
+
+5. **Open a Pull Request** and describe your addition.
+
+---
 
 ## 🤝 Contributing
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+- **Enhancements:** Open an issue with the "enhancement" label.
+- **Bug Reports:** Please provide clear steps to reproduce and screenshots if possible.
+- **Extensions:** If you build an integration or plugin, let us know! We’ll feature it here.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+All contributors must follow our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
-### Adding a new logo
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/add-new-logo`)
-3. Add your SVG logo to the `public/logos` directory.
-4. Add the logo's metadata to `app/data/logos.ts`.
-5. Commit your Changes (`git commit -m 'Add some amazing logo'`)
-6. Push to the Branch (`git push origin feature/add-new-logo`)
-7. Open a Pull Request
+---
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [LICENSE](./LICENSE.md) for details.
+
+---
 
 ## 🙏 Acknowledgements
 
