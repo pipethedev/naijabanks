@@ -44,30 +44,32 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language, className,
     const syntaxTheme = resolvedTheme === 'dark' ? coldarkDark : coldarkCold;
 
     return (
-        <div className={cn('bg-secondary group relative rounded-md', className)}>
-            <SyntaxHighlighter
-                language={language}
-                style={syntaxTheme}
-                customStyle={{
-                    margin: 0,
-                    padding: '1rem',
-                    background: 'transparent',
-                    backgroundColor: 'transparent',
-                    fontSize: '0.95rem',
-                    lineHeight: 1.6
-                }}
-                codeTagProps={{
-                    style: {
-                        fontFamily: 'var(--font-mono)'
-                    }
-                }}
-                {...props}>
-                {code}
-            </SyntaxHighlighter>
+        <div className={cn('bg-secondary group relative rounded-md')}>
+            <div className={cn('rounded-[inherit] bg-[inherit]', className)}>
+                <SyntaxHighlighter
+                    language={language}
+                    style={syntaxTheme}
+                    customStyle={{
+                        margin: 0,
+                        padding: '1rem',
+                        background: 'transparent',
+                        backgroundColor: 'transparent',
+                        fontSize: '0.95rem',
+                        lineHeight: 1.6
+                    }}
+                    codeTagProps={{
+                        style: {
+                            fontFamily: 'var(--font-mono)'
+                        }
+                    }}
+                    {...props}>
+                    {code}
+                </SyntaxHighlighter>
+            </div>
             <button
                 type='button'
                 onClick={handleCopy}
-                className='bg-secondary hover:bg-secondary/90 group-hover:bg-primary-foreground/80 absolute top-2 right-2 rounded-md border p-2 opacity-0 transition-all group-hover:opacity-100'
+                className='bg-secondary md:hover:bg-secondary/90 md:group-hover:bg-primary-foreground/80 absolute top-2 right-2 z-10 rounded-md border p-2 transition-all md:opacity-0 md:group-hover:opacity-100'
                 title='Copy code'>
                 <AnimatePresence initial={false} mode='wait'>
                     <motion.div

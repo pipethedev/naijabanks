@@ -116,7 +116,7 @@ export const LogoCodeModal: React.FC = () => {
 
                         <div className='relative overflow-hidden p-6'>
                             {isLoading ? (
-                                <div className='flex h-[calc(82vh-200px)] items-center justify-center'>
+                                <div className='flex h-[calc(65vh-200px)] items-center justify-center md:h-[calc(82vh-200px)]'>
                                     <Spinner size={32} />
                                 </div>
                             ) : (
@@ -125,7 +125,7 @@ export const LogoCodeModal: React.FC = () => {
                                         code={currentCode}
                                         language={currentLanguage}
                                         wrapLongLines
-                                        className='h-[calc(82vh-200px)] overflow-y-auto'
+                                        className='h-[calc(65vh-200px)] overflow-y-auto md:h-[calc(82vh-200px)]'
                                     />
                                 </div>
                             )}
