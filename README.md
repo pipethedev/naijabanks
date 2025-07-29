@@ -126,7 +126,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
     {
         title: "Bank Name",
         categories: ["Bank", "NGX"],
-        route: "/logos/bank-name.svg",
+        route: "/library/bank-name.svg",
         url: "https://bankwebsite.com",
         ticker: "TICKER" // For NGX-listed companies
     }
