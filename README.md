@@ -167,4 +167,5 @@ Distributed under the MIT License. See [LICENSE](./LICENSE.md) for details.
 ## 🙏 Acknowledgements
 
 - **Inspiration:** [svgl.app](https://svgl.app/) by [pheralb](https://github.com/pheralb)
+- **UI Components:** [midday](https://github.com/midday-ai/midday) by [pontusab](https://github.com/pontusab)
 - **Logos:** All logos are the property of their respective owners.
