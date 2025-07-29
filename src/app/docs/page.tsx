@@ -113,7 +113,7 @@ export interface ICategory {
     ];
 
     return (
-        <div className='bg-background min-h-screen py-10 pb-14 sm:px-[15%]'>
+        <div className='bg-background min-h-screen py-10 pb-24 sm:px-[15%] md:pb-14'>
             <div className='mx-auto space-y-12 font-sans'>
                 <header className='space-y-2'>
                     <h1 className='text-3xl font-bold tracking-tight'>API Documentation</h1>
