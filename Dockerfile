@@ -19,6 +19,14 @@ FROM base AS builder
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Declare build-time arguments for public environment variables
+ARG NEXT_PUBLIC_ROOT_DOMAIN
+ARG NEXT_PUBLIC_GOOGLE_ANALYTICS
+
+# Set environment variables from the build arguments
+ENV NEXT_PUBLIC_ROOT_DOMAIN=$NEXT_PUBLIC_ROOT_DOMAIN
+ENV NEXT_PUBLIC_GOOGLE_ANALYTICS=$NEXT_PUBLIC_GOOGLE_ANALYTICS
+
 # Copy dependencies from the previous stage
 COPY --from=deps /app/node_modules ./node_modules
 # Copy the rest of the application source code
