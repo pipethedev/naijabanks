@@ -5,8 +5,8 @@ WORKDIR /app
 # This stage is dedicated to installing dependencies and will be cached by Docker
 # unless package.json or pnpm-lock.yaml changes.
 FROM base AS deps
-# Install necessary tools for pnpm
-RUN npm install -g pnpm
+# Install necessary tools for pnpm (pinned so pnpm releases can't change build behavior)
+RUN npm install -g pnpm@10
 
 # Copy only the files required for dependency installation to leverage build cache
 COPY package.json pnpm-lock.yaml ./
@@ -37,7 +37,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build the Next.js application. This requires the `output: 'standalone'`
 # setting in next.config.mjs for an optimized production server.
-RUN npm install -g pnpm
+RUN npm install -g pnpm@10
 RUN pnpm build
 
 # This is the final, minimal image that will run in production.
