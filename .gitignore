@@ -37,8 +37,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Environment variables
-.env
-.env.*
 !.env.example
 
 # vercel
@@ -47,3 +45,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local env files (restored by security cleanup)
+.env
+.env.*
+!.env.example
+!.env.sample
