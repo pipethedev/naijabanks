@@ -29,7 +29,7 @@ A curated collection of high-quality SVG logos for Nigerian banks, fintech compa
     </a>
     <span>&nbsp;▪️&nbsp;</span>
     <a href="#-contributing">
-        Contributing
+        Contributing....
     </a>
 </div>
 
